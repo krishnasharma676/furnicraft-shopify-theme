@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_jVaWmY": {
@@ -7,7 +16,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Furniture That<br>Defines Comfort</h2>",
+            "text": "<h2>Furniture That<br/>Defines Comfort</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -18,7 +27,7 @@
             "letter_spacing": "-0.5px",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -44,7 +53,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "#E7E5E4",
+            "text_color": "#e7e5e4",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -75,11 +84,20 @@
             "custom_height": 100,
             "background_media": "none",
             "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_color": "",
             "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -94,9 +112,9 @@
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button-custom",
-                "custom_button_background": "#2C221E",
-                "custom_button_text": "#FFFFFF",
-                "custom_button_border": "#2C221E",
+                "custom_button_background": "#2c221e",
+                "custom_button_text": "#ffffff",
+                "custom_button_border": "#2c221e",
                 "link_text_color": "",
                 "width": "fit-content",
                 "custom_width": 100,
@@ -113,9 +131,9 @@
                 "link": "/pages/contact",
                 "open_in_new_tab": false,
                 "style_class": "button-custom",
-                "custom_button_background": "#FFFFFF",
-                "custom_button_text": "#2C221E",
-                "custom_button_border": "#FFFFFF",
+                "custom_button_background": "#ffffff",
+                "custom_button_text": "#2c221e",
+                "custom_button_border": "#ffffff",
                 "link_text_color": "",
                 "width": "fit-content",
                 "custom_width": 100,
@@ -156,7 +174,7 @@
         "vertical_alignment_flex_direction_column": "center",
         "gap": 16,
         "section_width": "page-width",
-        "section_height": "full-screen",
+        "section_height": "large",
         "section_height_custom": 50,
         "background_color": "rgba(0,0,0,0)",
         "toggle_overlay": true,
