@@ -81,7 +81,9 @@
             {% when 'localization' %}
               {{ localization }}
             {% when 'search' %}
-              {{ search }}
+              {% unless column == 'right' %}
+                {{ search }}
+              {% endunless %}
             {% when 'drawer_search' %}
               {{ drawer_search }}
             {% when 'actions' %}

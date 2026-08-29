@@ -1885,3 +1885,255 @@ main > .shopify-section:first-child .section:not(.disable-section-top-offset) {
     margin-top: calc(var(--header-height) * var(--transparent-header-offset-boolean) * -1);
   }
 }
+
+/* FurniCraft Header Utility Enhancements */
+.header__columns {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+.header__column--left {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.header__column--center {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-width: 0 !important;
+}
+
+.header__column--right {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0 !important;
+}
+
+.header-menu {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.header-menu__inner {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+header-actions {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.header-actions__action {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 32px !important;
+  width: 32px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #1C1917 !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+}
+
+.header-actions__action:hover {
+  color: #78716C !important;
+}
+
+.furnicraft-bulk-quote-btn {
+  background-color: #2C221E !important;
+  color: #FFFFFF !important;
+  padding: 0 14px !important;
+  height: 32px !important;
+  border-radius: 4px !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+  margin-inline-end: 18px !important;
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+.furnicraft-bulk-quote-btn:hover {
+  background-color: #42342E !important;
+  color: #FFFFFF !important;
+  transform: translateY(-1px) !important;
+}
+
+.menu-list__link-title {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+
+.menu-list__link-chevron {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+}
+
+.chevron-svg {
+  width: 9px;
+  height: 6px;
+  stroke: currentColor;
+  display: block;
+}
+
+@media screen and (max-width: 989px) {
+  .furnicraft-bulk-quote-btn {
+    display: none !important;
+  }
+}
+
+.header-actions__wishlist {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #1C1917 !important;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  padding: 4px;
+  text-decoration: none;
+}
+
+.header-actions__wishlist:hover {
+  opacity: 0.75;
+  transform: scale(1.05);
+}
+
+.wishlist-icon__svg {
+  width: 19px;
+  height: 19px;
+  stroke: currentColor;
+}
+
+/* ==========================================================================
+   FurniCraft Luxury Product Card Design System
+   ========================================================================== */
+
+/* Product Card Wrapper */
+.product-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #FFFFFF;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Card Content Container */
+.product-grid__card {
+  border: 1px solid rgba(44, 34, 30, 0.08) !important;
+  border-radius: 8px !important;
+  padding: 14px !important;
+  background: #FFFFFF !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.product-card:hover .product-grid__card {
+  border-color: rgba(44, 34, 30, 0.25) !important;
+  box-shadow: 0 12px 28px rgba(44, 34, 30, 0.08) !important;
+}
+
+/* Product Card Image Gallery Container */
+.product-card-gallery,
+.product-card .media-gallery {
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  background-color: #F7F7F6 !important;
+}
+
+.product-card img {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.product-card:hover img {
+  transform: scale(1.04) !important;
+}
+
+/* Luxury Product Badges (Sale / Sold Out) */
+.product-badges__badge {
+  background-color: #2C221E !important;
+  color: #FFFFFF !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.6px !important;
+  text-transform: uppercase !important;
+  padding: 4px 10px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Product Card Typography & Title */
+.product-card .product-title,
+.product-card :is(h3, h4, .h4, .h3) {
+  font-family: var(--font-heading--family, inherit) !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  color: #1C1917 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.1px !important;
+  transition: color 0.2s ease !important;
+  margin-top: 4px !important;
+}
+
+.product-card:hover :is(h3, h4, .h4, .h3) {
+  color: #78716C !important;
+}
+
+/* Product Card Price Styling */
+.product-card product-price,
+.product-card .price {
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: #2C221E !important;
+}
+
+.product-card .compare-at-price {
+  font-size: 0.85rem !important;
+  font-weight: 400 !important;
+  color: #A8A29E !important;
+  text-decoration: line-through !important;
+  margin-left: 6px !important;
+}
+
+/* Quick Add / Add to Cart Button Styling */
+button.quick-add__button {
+  background: #2C221E !important;
+  color: #FFFFFF !important;
+  border: 1px solid #2C221E !important;
+  border-radius: 50px !important;
+  box-shadow: 0 4px 12px rgba(44, 34, 30, 0.2) !important;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+button.quick-add__button:hover {
+  background: #42342E !important;
+  border-color: #42342E !important;
+  scale: 1.05 !important;
+  box-shadow: 0 6px 16px rgba(44, 34, 30, 0.3) !important;
+}
+
+.quick-add__button .add-to-cart-icon,
+.quick-add__button svg {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}

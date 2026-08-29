@@ -93,8 +93,15 @@
 
     {% capture children %}
       {% for link in block_settings.menu.links %}
+        {% liquid
+          assign link_title_lc = link.title | downcase
+          assign is_bulk_link = false
+          if link_title_lc contains 'quote' or link_title_lc contains 'bulk'
+            assign is_bulk_link = true
+          endif
+        %}
         <li
-          class="menu-list__list-item"
+          class="menu-list__list-item{% if is_bulk_link %} desktop:hidden{% endif %}"
           on:blur="/deactivate"
           on:pointerenter="/activate"
           on:pointerleave="/deactivate"
@@ -102,16 +109,28 @@
           {%- if link.links != blank -%}
             <span class="menu-list__trigger">
           {%- endif -%}
+          {% liquid
+            assign link_title_lc = link.title | downcase
+          %}
           <a
             href="{{ link.url }}"
             data-skip-node-update="true"
-            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
+            class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}{% if link_title_lc contains 'quote' or link_title_lc contains 'bulk' %} menu-list__link--bulk-btn{% endif %}"
             {% if link.current %}
               aria-current="page"
             {% endif %}
             ref="menuitem"
           >
-            <span class="menu-list__link-title">{{- link.title -}}</span>
+            <span class="menu-list__link-title">
+              {{- link.title -}}
+              {%- if link.links != blank -%}
+                <span class="menu-list__link-chevron" aria-hidden="true">
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg" class="chevron-svg">
+                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              {%- endif -%}
+            </span>
           </a>
           {%- if link.links != blank -%}
             <button
@@ -310,13 +329,14 @@
   }
 
   .menu-list__link {
-    font-family: var(--menu-top-level-font-family);
-    font-style: var(--menu-top-level-font-style);
-    font-weight: var(--menu-top-level-font-weight);
-    font-size: var(--menu-top-level-font-size);
-    line-height: var(--menu-top-level-font-line-height);
-    text-transform: var(--menu-top-level-font-case);
-    color: var(--menu-top-level-font-color);
+    font-family: var(--menu-top-level-font-family, sans-serif);
+    font-style: var(--menu-top-level-font-style, normal);
+    font-weight: var(--menu-top-level-font-weight, 600);
+    font-size: 13.5px;
+    letter-spacing: 0.5px;
+    line-height: var(--menu-top-level-font-line-height, 1.2);
+    text-transform: uppercase;
+    color: var(--menu-top-level-font-color, #1c1917);
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -324,15 +344,20 @@
     cursor: pointer;
     height: 100%;
     margin-block: 0;
+    position: relative;
+    transition: opacity 0.2s ease, color 0.2s ease;
 
     &::after {
       content: '';
       position: absolute;
-      display: none;
-      top: var(--header-padding);
-      height: var(--box-height);
-      left: 0;
-      right: 0;
+      bottom: 0;
+      left: 6px;
+      right: 6px;
+      height: 2px;
+      background-color: var(--color-foreground, #1c1917);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease-in-out;
     }
 
     &[data-safety-box='true']::after {
@@ -342,11 +367,59 @@
     &:hover,
     &:focus {
       color: var(--menu-top-level-font-color);
+      opacity: 0.85;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
     }
 
     @media screen and (min-width: 750px) {
-      font-size: var(--menu-top-level-font-size-desktop);
+      font-size: 13.5px;
+      letter-spacing: 0.6px;
     }
+  }
+
+  .menu-list__link.menu-list__link--bulk-btn {
+    background-color: #2C221E !important;
+    color: #FFFFFF !important;
+    padding: 6px 14px !important;
+    border-radius: 4px !important;
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: auto !important;
+    align-self: center !important;
+    margin-inline-start: 4px !important;
+    transition: background-color 0.2s ease, transform 0.2s ease !important;
+  }
+
+  .menu-list__link.menu-list__link--bulk-btn::after {
+    display: none !important;
+  }
+
+  .menu-list__link.menu-list__link--bulk-btn:hover {
+    background-color: #42342E !important;
+    color: #FFFFFF !important;
+    opacity: 1 !important;
+    transform: translateY(-1px) !important;
+  }
+
+  .menu-list__link-chevron {
+    font-size: 11px;
+    margin-inline-start: 3px;
+    display: inline-block;
+    vertical-align: middle;
+    transition: transform 0.2s ease;
+  }
+
+  .menu-list__list-item:hover .menu-list__link-chevron {
+    transform: translateY(1px);
   }
 
   /* Wraps a top-level link and its disclosure button. Positioned so the

@@ -55,14 +55,21 @@
     class="header-logo__image-container header-logo__image-container--original"
     data-testid="header-logo"
   >
-    {% render 'image',
-      image: settings.logo,
-      class: 'header-logo__image',
-      height: settings.logo_height,
-      alt_text_fallback: alt_text_fallback,
-      text_fallback: shop.name,
-      style: logo_style
-    %}
+    {% if settings.logo != blank %}
+      {% render 'image',
+        image: settings.logo,
+        class: 'header-logo__image',
+        height: settings.logo_height,
+        alt_text_fallback: alt_text_fallback,
+        text_fallback: shop.name,
+        style: logo_style
+      %}
+    {% else %}
+      <div class="header-logo__text-wrapper">
+        <span class="header-logo__title">{{ shop.name }}</span>
+        <span class="header-logo__tagline">LIVE BEAUTIFUL</span>
+      </div>
+    {% endif %}
   </span>
 
   {% if use_inverse_logo %}
@@ -70,14 +77,21 @@
       class="header-logo__image-container header-logo__image-container--inverse"
       data-testid="header-logo-inverse"
     >
-      {% render 'image',
-        image: inverse_logo,
-        class: 'header-logo__image',
-        height: settings.logo_height,
-        alt_text_fallback: alt_text_fallback,
-        text_fallback: shop.name,
-        style: inverse_logo_style
-      %}
+      {% if inverse_logo != blank %}
+        {% render 'image',
+          image: inverse_logo,
+          class: 'header-logo__image',
+          height: settings.logo_height,
+          alt_text_fallback: alt_text_fallback,
+          text_fallback: shop.name,
+          style: inverse_logo_style
+        %}
+      {% else %}
+        <div class="header-logo__text-wrapper">
+          <span class="header-logo__title">{{ shop.name }}</span>
+          <span class="header-logo__tagline">LIVE BEAUTIFUL</span>
+        </div>
+      {% endif %}
     </span>
   {% endif %}
 </a>
@@ -87,11 +101,10 @@
     display: flex;
     height: 100%;
     font-size: var(--font-size--md);
-    font-family: var(--font-family);
-    font-weight: var(--font-weight);
-    font-style: var(--font-style);
+    font-family: var(--font-heading--family, serif);
+    font-weight: 600;
     color: var(--color-foreground);
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     text-decoration: none;
 
@@ -118,6 +131,32 @@
     &:hover {
       text-decoration: none;
     }
+  }
+
+  .header-logo__text-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.1;
+  }
+
+  .header-logo__title {
+    font-family: var(--font-heading--family, serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-foreground, #1c1917);
+  }
+
+  .header-logo__tagline {
+    font-family: var(--font-body--family, sans-serif);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground-rgb, 28, 25, 23) / 0.65);
+    margin-top: 1px;
   }
 
   .header-logo__image {
