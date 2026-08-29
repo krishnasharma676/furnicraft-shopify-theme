@@ -53,7 +53,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "#e7e5e4",
+            "text_color": "#FFFFFF",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -128,7 +128,7 @@
               "name": "Bulk Quote Button",
               "settings": {
                 "label": "REQUEST A BULK QUOTE",
-                "link": "/pages/contact",
+                "link": "shopify://pages/request-a-bulk-quote",
                 "open_in_new_tab": false,
                 "style_class": "button-custom",
                 "custom_button_background": "#ffffff",
