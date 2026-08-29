@@ -1,0 +1,130 @@
+/* ==========================================================================
+   Bulk Order Banner Section Styles - FurniCraft Luxury Minimalist
+   ========================================================================== */
+
+.bulk-order-banner {
+  padding-block: 16px 36px;
+  background-color: #FFFFFF;
+}
+
+.bulk-order-banner__wrapper {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+.bulk-order-banner__container {
+  background-color: #232F28;
+  border-radius: 12px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 48% 52%;
+  align-items: stretch;
+  min-height: 220px;
+}
+
+.bulk-order-banner__content {
+  padding: 32px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #FFFFFF;
+}
+
+.bulk-order-banner__heading {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.15;
+  margin: 0 0 8px 0;
+  font-family: inherit;
+  letter-spacing: -0.2px;
+}
+
+.bulk-order-banner__subtext {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+  margin: 0 0 18px 0;
+  max-width: 420px;
+}
+
+.bulk-order-banner__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  background-color: #FFFFFF;
+  color: #232F28;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bulk-order-banner__btn:hover {
+  background-color: #F0F0EE;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+.bulk-order-banner__media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  overflow: hidden;
+}
+
+.bulk-order-banner__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 989px) {
+  .bulk-order-banner__container {
+    grid-template-columns: 50% 50%;
+  }
+
+  .bulk-order-banner__content {
+    padding: 28px 24px;
+  }
+
+  .bulk-order-banner__heading {
+    font-size: 1.4rem;
+  }
+
+  .bulk-order-banner__subtext {
+    font-size: 0.8125rem;
+    margin-bottom: 16px;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .bulk-order-banner {
+    padding-block: 16px 28px;
+  }
+
+  .bulk-order-banner__container {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .bulk-order-banner__content {
+    padding: 28px 20px;
+    align-items: flex-start;
+  }
+
+  .bulk-order-banner__media {
+    height: 200px;
+    min-height: 200px;
+  }
+}

@@ -7,7 +7,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>Furniture That<br>Defines Comfort</h2>",
+            "text": "<h2>Furniture That<br/>Defines Comfort</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -18,7 +18,7 @@
             "letter_spacing": "-0.5px",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -44,7 +44,7 @@
             "letter_spacing": "normal",
             "case": "none",
             "wrap": "pretty",
-            "text_color": "#E7E5E4",
+            "text_color": "#FFFFFF",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -75,11 +75,20 @@
             "custom_height": 100,
             "background_media": "none",
             "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_color": "",
             "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
@@ -94,9 +103,9 @@
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button-custom",
-                "custom_button_background": "#2C221E",
-                "custom_button_text": "#FFFFFF",
-                "custom_button_border": "#2C221E",
+                "custom_button_background": "#2c221e",
+                "custom_button_text": "#ffffff",
+                "custom_button_border": "#2c221e",
                 "link_text_color": "",
                 "width": "fit-content",
                 "custom_width": 100,
@@ -110,12 +119,12 @@
               "name": "Bulk Quote Button",
               "settings": {
                 "label": "REQUEST A BULK QUOTE",
-                "link": "/pages/contact",
+                "link": "shopify://pages/request-a-bulk-quote",
                 "open_in_new_tab": false,
                 "style_class": "button-custom",
-                "custom_button_background": "#FFFFFF",
-                "custom_button_text": "#2C221E",
-                "custom_button_border": "#FFFFFF",
+                "custom_button_background": "#ffffff",
+                "custom_button_text": "#2c221e",
+                "custom_button_border": "#ffffff",
                 "link_text_color": "",
                 "width": "fit-content",
                 "custom_width": 100,
@@ -156,7 +165,7 @@
         "vertical_alignment_flex_direction_column": "center",
         "gap": 16,
         "section_width": "page-width",
-        "section_height": "full-screen",
+        "section_height": "large",
         "section_height_custom": 50,
         "background_color": "rgba(0,0,0,0)",
         "toggle_overlay": true,
@@ -167,6 +176,100 @@
         "reflection_opacity": 75,
         "padding-block-start": 100,
         "padding-block-end": 72
+      }
+    },
+    "shop_by_category": {
+      "type": "shop-by-category",
+      "blocks": {
+        "category_bedroom": {
+          "type": "category",
+          "settings": {
+            "collection": "bedroom"
+          }
+        },
+        "category_dining": {
+          "type": "category",
+          "settings": {
+            "collection": "dining-room"
+          }
+        },
+        "category_office": {
+          "type": "category",
+          "settings": {
+            "collection": "home-office"
+          }
+        },
+        "category_living": {
+          "type": "category",
+          "settings": {
+            "collection": "living-room"
+          }
+        }
+      },
+      "block_order": [
+        "category_bedroom",
+        "category_dining",
+        "category_office",
+        "category_living"
+      ],
+      "settings": {
+        "heading": "SHOP BY CATEGORY",
+        "show_view_all": true,
+        "view_all_text": "VIEW ALL CATEGORIES",
+        "view_all_link": ""
+      }
+    },
+    "value_props_bar": {
+      "type": "value-props-bar",
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Premium Quality",
+            "subtext": "Finest materials"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "craft",
+            "title": "Expert Craftsmanship",
+            "subtext": "Built to last"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "custom",
+            "title": "Customisation",
+            "subtext": "Made for you"
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "icon": "truck",
+            "title": "Pan-India Delivery",
+            "subtext": "Fast & reliable"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ],
+      "settings": {}
+    },
+    "bulk_order_banner": {
+      "type": "bulk-order-banner",
+      "settings": {
+        "heading": "Furnishing a large space?",
+        "subheading": "Get special pricing for bulk orders. Perfect for hotels, offices & projects.",
+        "button_label": "REQUEST A BULK QUOTE",
+        "button_link": "/pages/contact"
       }
     },
     "product_list_fa6P9H": {
@@ -371,6 +474,9 @@
   },
   "order": [
     "hero_jVaWmY",
+    "shop_by_category",
+    "value_props_bar",
+    "bulk_order_banner",
     "product_list_fa6P9H"
   ]
 }

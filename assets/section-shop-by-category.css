@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Shop By Category Section Styles - FurniCraft Luxury Dynamic Collections
+   ========================================================================== */
+
+.shop-by-category {
+  padding-block: 48px 40px;
+  background-color: #FFFFFF;
+}
+
+.shop-by-category__wrapper {
+  margin-inline: auto;
+  max-width: 1280px;
+  padding-inline: 16px;
+}
+
+.shop-by-category__heading {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #1C1917;
+  margin-block: 0 28px;
+  text-align: center;
+}
+
+.shop-by-category__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+/* Category Card */
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+}
+
+.category-card__image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #F7F7F7;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.category-card:hover .category-card__image-wrapper {
+  background-color: #EFEFEF;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.category-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.category-card:hover .category-card__image {
+  transform: scale(1.05);
+}
+
+.category-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F3F3F3;
+}
+
+.category-card__placeholder svg {
+  width: 50%;
+  height: 50%;
+  opacity: 0.35;
+}
+
+.category-card__title {
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1A1A1A;
+  text-decoration: none;
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+.category-card:hover .category-card__title {
+  color: #824E2B;
+}
+
+/* Section Footer Link */
+.shop-by-category__footer {
+  margin-top: 36px;
+  text-align: center;
+}
+
+.shop-by-category__view-all {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #1C1917;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(28, 25, 23, 0.25);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.shop-by-category__view-all:hover {
+  color: #824E2B;
+  border-bottom-color: #824E2B;
+  transform: translateX(2px);
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 989px) {
+  .shop-by-category__grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .shop-by-category {
+    padding-block: 36px 28px;
+  }
+
+  .shop-by-category__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .shop-by-category__heading {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .category-card__title {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+}
