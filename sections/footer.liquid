@@ -1,263 +1,407 @@
+{{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
+{%- style -%}
+  .footer {
+    background-color: {{ section.settings.background_color | default: '#2C221E' }};
+    color: {{ section.settings.text_color | default: '#FFFFFF' }};
+  }
+{%- endstyle -%}
 
-{% liquid
-  if section.settings.background_color != blank
-    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
-  endif
-%}
+<footer class="footer">
+  {%- if section.settings.show_instagram_bar -%}
+    <div class="footer-instagram-bar">
+      <div class="footer-container footer-instagram-bar__container">
+        <a href="{{ section.settings.instagram_url | default: 'https://instagram.com' }}" target="_blank" rel="noopener" class="footer-instagram-bar__link">
+          <span class="footer-instagram-bar__text">{{ section.settings.instagram_text | escape }}</span>
+          <svg class="footer-instagram-bar__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+      </div>
+    </div>
+  {%- endif -%}
 
-<div
-  class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
-></div>
-<div
-  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
->
-  {% liquid
-    assign total_blocks = section.blocks.size
+  <div class="footer__main footer-container">
+    <div class="footer__grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'brand' -%}
+              <div class="footer__col footer__col--brand" {{ block.shopify_attributes }}>
+                <div class="footer__brand-header">
+                  <h2 class="footer__brand-title">{{ block.settings.title | escape }}</h2>
+                  {%- if block.settings.subtitle != blank -%}
+                    <span class="footer__brand-subtitle">{{ block.settings.subtitle | escape }}</span>
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.subtext != blank -%}
+                  <p class="footer__brand-text">{{ block.settings.subtext | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.show_social -%}
+                  <div class="footer__socials">
+                    <a href="{{ settings.social_instagram_link | default: '#' }}" class="footer__social-link" aria-label="Instagram">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                      </svg>
+                    </a>
+                    <a href="{{ settings.social_facebook_link | default: '#' }}" class="footer__social-link" aria-label="Facebook">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                      </svg>
+                    </a>
+                    <a href="{{ settings.social_pinterest_link | default: '#' }}" class="footer__social-link" aria-label="Pinterest">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.668.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.62 0 12.017 0z"/>
+                      </svg>
+                    </a>
+                    <a href="{{ settings.social_youtube_link | default: '#' }}" class="footer__social-link" aria-label="YouTube">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                      </svg>
+                    </a>
+                  </div>
+                {%- endif -%}
+              </div>
 
-    # Grid layout calculations
-    assign grid_columns = total_blocks | at_most: 4
+            {%- when 'menu' -%}
+              <div class="footer__col footer__col--menu" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="footer__col-heading">{{ block.settings.heading | escape }}</h3>
+                {%- endif -%}
+                {%- assign link_list = linklists[block.settings.menu] -%}
+                <ul class="footer__menu-list">
+                  {%- if link_list != blank and link_list.links.size > 1 -%}
+                    {%- for link in link_list.links -%}
+                      <li>
+                        <a href="{{ link.url }}" class="footer__menu-link">{{ link.title | escape }}</a>
+                      </li>
+                    {%- endfor -%}
+                  {%- else -%}
+                    {%- case block.settings.heading -%}
+                      {%- when 'COLLECTIONS' -%}
+                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Living Room</a></li>
+                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Bedroom</a></li>
+                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Dining Room</a></li>
+                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Office</a></li>
+                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Outdoor</a></li>
+                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">New Arrivals</a></li>
+                      {%- when 'CUSTOMER SERVICE' -%}
+                        <li><a href="/policies/shipping-policy" class="footer__menu-link">Shipping Policy</a></li>
+                        <li><a href="/policies/refund-policy" class="footer__menu-link">Returns & Refunds</a></li>
+                        <li><a href="/policies/privacy-policy" class="footer__menu-link">Privacy Policy</a></li>
+                        <li><a href="/policies/terms-of-service" class="footer__menu-link">Terms & Conditions</a></li>
+                      {%- else -%}
+                        <li><a href="/pages/about" class="footer__menu-link">About Us</a></li>
+                        <li><a href="/pages/contact" class="footer__menu-link">Contact Us</a></li>
+                        <li><a href="/pages/contact" class="footer__menu-link">Bulk Orders</a></li>
+                        <li><a href="/pages/faq" class="footer__menu-link">FAQ</a></li>
+                        <li><a href="/pages/track-order" class="footer__menu-link">Track Order</a></li>
+                    {%- endcase -%}
+                  {%- endif -%}
+                </ul>
+              </div>
 
-    # Calculate last row counts using modulo arithmetic
-    # last_row_count = (total_blocks - 1) % N + 1
-    assign last_row_count = total_blocks | minus: 1 | modulo: 4 | plus: 1
-    assign tablet_last_row_count = total_blocks | minus: 1 | modulo: 2 | plus: 1
+            {%- when 'contact' -%}
+              <div class="footer__col footer__col--contact" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="footer__col-heading">{{ block.settings.heading | escape }}</h3>
+                {%- endif -%}
+                <ul class="footer__contact-list">
+                  {%- if block.settings.phone != blank -%}
+                    <li class="footer__contact-item">
+                      <svg class="footer__contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                      </svg>
+                      <a href="tel:{{ block.settings.phone | replace: ' ', '' }}" class="footer__contact-link">{{ block.settings.phone | escape }}</a>
+                    </li>
+                  {%- endif -%}
 
-    # Check if there are orphaned elements (single item in last row)
-    assign has_isolated_grid_item_desktop = false
-    assign has_isolated_grid_item_tablet = false
+                  {%- if block.settings.email != blank -%}
+                    <li class="footer__contact-item">
+                      <svg class="footer__contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                      </svg>
+                      <a href="mailto:{{ block.settings.email }}" class="footer__contact-link">{{ block.settings.email | escape }}</a>
+                    </li>
+                  {%- endif -%}
 
-    if total_blocks > 4 and last_row_count == 1
-      assign has_isolated_grid_item_desktop = true
-    endif
+                  {%- if block.settings.address != blank -%}
+                    <li class="footer__contact-item">
+                      <svg class="footer__contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                      </svg>
+                      <span class="footer__contact-text">{{ block.settings.address | escape }}</span>
+                    </li>
+                  {%- endif -%}
+                </ul>
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Default Fallback Column 1: Brand -->
+        <div class="footer__col footer__col--brand">
+          <div class="footer__brand-header">
+            <h2 class="footer__brand-title">FurniCraft</h2>
+            <span class="footer__brand-subtitle">LIVE BEAUTIFUL</span>
+          </div>
+          <p class="footer__brand-text">Crafting beautiful furniture that brings comfort and style to your home.</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Pinterest">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.668.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.367 18.62 0 12.017 0z"/></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+          </div>
+        </div>
 
-    if total_blocks == 5
-      assign has_isolated_grid_item_tablet = true
-    endif
-  %}
-  <div
-    class="
-      footer-content
-      spacing-style
-      {% if has_isolated_grid_item_desktop %}footer-content--isolated-grid-item-desktop{% endif %}
-      {% if has_isolated_grid_item_tablet %}footer-content--isolated-grid-item-tablet{% endif %}
-    "
-    style="
-      {%  render 'spacing-style', settings: section.settings %}
-      --footer-gap: {{ section.settings.gap }}px;
-      --grid-columns: {{ grid_columns }};
-      --last-row-count: {{ last_row_count }};
-      --tablet-last-row-count: {{ tablet_last_row_count }};
-    "
-  >
-    {% content_for 'blocks' %}
+        <!-- Default Fallback Column 2: COLLECTIONS -->
+        <div class="footer__col footer__col--menu">
+          <h3 class="footer__col-heading">COLLECTIONS</h3>
+          <ul class="footer__menu-list">
+            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Living Room</a></li>
+            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Bedroom</a></li>
+            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Dining Room</a></li>
+            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Office</a></li>
+            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Outdoor</a></li>
+            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">New Arrivals</a></li>
+          </ul>
+        </div>
+
+        <!-- Default Fallback Column 3: QUICK LINKS -->
+        <div class="footer__col footer__col--menu">
+          <h3 class="footer__col-heading">QUICK LINKS</h3>
+          <ul class="footer__menu-list">
+            <li><a href="/pages/about" class="footer__menu-link">About Us</a></li>
+            <li><a href="/pages/contact" class="footer__menu-link">Contact Us</a></li>
+            <li><a href="/pages/contact" class="footer__menu-link">Bulk Orders</a></li>
+            <li><a href="/pages/faq" class="footer__menu-link">FAQ</a></li>
+            <li><a href="/pages/track-order" class="footer__menu-link">Track Order</a></li>
+          </ul>
+        </div>
+
+        <!-- Default Fallback Column 4: CUSTOMER SERVICE -->
+        <div class="footer__col footer__col--menu">
+          <h3 class="footer__col-heading">CUSTOMER SERVICE</h3>
+          <ul class="footer__menu-list">
+            <li><a href="/policies/shipping-policy" class="footer__menu-link">Shipping Policy</a></li>
+            <li><a href="/policies/refund-policy" class="footer__menu-link">Returns & Refunds</a></li>
+            <li><a href="/policies/privacy-policy" class="footer__menu-link">Privacy Policy</a></li>
+            <li><a href="/policies/terms-of-service" class="footer__menu-link">Terms & Conditions</a></li>
+          </ul>
+        </div>
+
+        <!-- Default Fallback Column 5: CONTACT -->
+        <div class="footer__col footer__col--contact">
+          <h3 class="footer__col-heading">CONTACT</h3>
+          <ul class="footer__contact-list">
+            <li class="footer__contact-item">
+              <svg class="footer__contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:+919876543210" class="footer__contact-link">+91 98765 43210</a>
+            </li>
+            <li class="footer__contact-item">
+              <svg class="footer__contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:support@furnicraft.com" class="footer__contact-link">support@furnicraft.com</a>
+            </li>
+            <li class="footer__contact-item">
+              <svg class="footer__contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span class="footer__contact-text">B-125, New Delhi, India</span>
+            </li>
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
   </div>
-</div>
 
-{% stylesheet %}
-  .footer-content {
-    contain: content;
-    content-visibility: auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--footer-gap);
-    align-items: start;
-  }
-
-  .footer-content .menu__heading__default {
-    font-weight: var(--font-heading--weight);
-  }
-
-  @media screen and (min-width: 750px) and (max-width: 989px) {
-    .footer-content {
-      grid-template-columns: repeat(min(var(--grid-columns), 3), 1fr);
-      grid-auto-flow: row;
-    }
-
-    .footer-content[style*='--grid-columns: 4'] {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .footer-content--isolated-grid-item-tablet > :last-child {
-      grid-column: 1 / -1;
-    }
-  }
-
-  @media screen and (min-width: 990px) {
-    .footer-content {
-      grid-template-columns: repeat(var(--grid-columns), 1fr);
-    }
-
-    /* Single item centered */
-    .footer-content[style*='--grid-columns: 1'] {
-      justify-items: center;
-    }
-
-    .footer-content--isolated-grid-item-desktop > :last-child {
-      grid-column: 1 / -1;
-    }
-  }
-{% endstylesheet %}
+  <div class="footer__bottom">
+    <div class="footer-container footer__bottom-container">
+      <div class="footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text | escape }}
+      </div>
+      {%- if section.settings.show_payment_icons -%}
+        <div class="footer__payment-badges">
+          <span class="payment-badge payment-badge--gpay">GPay</span>
+          <span class="payment-badge payment-badge--visa">VISA</span>
+          <span class="payment-badge payment-badge--mc">mastercard</span>
+          <span class="payment-badge payment-badge--rupay">RuPay</span>
+          <span class="payment-badge payment-badge--upi">UPI</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
 
 {% schema %}
 {
-  "name": "t:names.footer",
-  "class": "section-wrapper",
-  "blocks": [
-    {
-      "type": "_divider"
-    },
-    {
-      "type": "@app"
-    },
-    {
-      "type": "button"
-    },
-    {
-      "type": "follow-on-shop"
-    },
-    {
-      "type": "group"
-    },
-    {
-      "type": "icon"
-    },
-    {
-      "type": "image"
-    },
-    {
-      "type": "menu"
-    },
-    {
-      "type": "payment-icons"
-    },
-    {
-      "type": "text"
-    },
-    {
-      "type": "logo"
-    },
-    {
-      "type": "jumbo-text"
-    },
-    {
-      "type": "social-links"
-    },
-    {
-      "type": "email-signup"
-    }
-  ],
-  "enabled_on": {
-    "groups": ["footer"]
-  },
+  "name": "Footer",
+  "tag": "footer",
+  "class": "section-footer",
   "settings": [
     {
-      "type": "select",
-      "id": "section_width",
-      "label": "t:settings.width",
-      "options": [
-        {
-          "value": "page-width",
-          "label": "t:options.page"
-        },
-        {
-          "value": "full-width",
-          "label": "t:options.full"
-        }
-      ],
-      "default": "page-width"
+      "type": "checkbox",
+      "id": "show_instagram_bar",
+      "label": "Show Instagram Top Strip",
+      "default": true
     },
     {
-      "type": "range",
-      "id": "gap",
-      "label": "t:settings.gap",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 0
+      "type": "text",
+      "id": "instagram_text",
+      "label": "Instagram Strip Text",
+      "default": "FOLLOW US @FURNICRAFT"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram Strip URL"
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "t:settings.background_color",
-      "default": "{{ settings.color_palette.foreground }}"
+      "label": "Background Color",
+      "default": "#2C221E"
     },
     {
-      "type": "header",
-      "content": "t:content.padding"
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
     },
     {
-      "type": "range",
-      "id": "padding-block-start",
-      "label": "t:settings.top",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 20
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Subtext",
+      "default": "All Rights Reserved."
     },
     {
-      "type": "range",
-      "id": "padding-block-end",
-      "label": "t:settings.bottom",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 20
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show Payment Badges",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand Info",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Brand Name",
+          "default": "FurniCraft"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Tagline",
+          "default": "LIVE BEAUTIFUL"
+        },
+        {
+          "type": "textarea",
+          "id": "subtext",
+          "label": "Description",
+          "default": "Crafting beautiful furniture that brings comfort and style to your home."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Show Social Media Icons",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Navigation Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "QUICK LINKS"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Select Menu",
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Contact Details",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "CONTACT"
+        },
+        {
+          "type": "text",
+          "id": "phone",
+          "label": "Phone Number",
+          "default": "+91 98765 43210"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "Email Address",
+          "default": "support@furnicraft.com"
+        },
+        {
+          "type": "text",
+          "id": "address",
+          "label": "Address",
+          "default": "B-125, New Delhi, India"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "t:names.footer",
-      "category": "t:categories.footer",
-      "settings": {
-        "gap": 20,
-        "padding-block-start": 36,
-        "padding-block-end": 36
-      },
-      "blocks": {
-        "newsletter-group": {
-          "type": "group",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "gap": 6,
-            "width": "fill"
-          },
-          "blocks": {
-            "newsletter-heading": {
-              "type": "text",
-              "settings": {
-                "text": "t:html_defaults.join_our_email_list",
-                "width": "100%",
-                "alignment": "left",
-                "type_preset": "h3"
-              }
-            },
-            "newsletter-text": {
-              "type": "text",
-              "settings": {
-                "text": "t:html_defaults.get_exclusive_deals_and_early_access_to_new_products",
-                "width": "100%",
-                "alignment": "left",
-                "type_preset": "rte"
-              }
-            }
-          },
-          "block_order": ["newsletter-heading", "newsletter-text"]
+      "name": "Footer",
+      "blocks": [
+        {
+          "type": "brand"
         },
-        "newsletter-form": {
-          "type": "email-signup",
+        {
+          "type": "menu",
           "settings": {
-            "width": "fill"
+            "heading": "COLLECTIONS"
           }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "QUICK LINKS"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "CUSTOMER SERVICE"
+          }
+        },
+        {
+          "type": "contact"
         }
-      },
-      "block_order": ["newsletter-group", "newsletter-form"]
+      ]
     }
   ]
 }
