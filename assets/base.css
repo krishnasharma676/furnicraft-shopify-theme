@@ -2241,3 +2241,193 @@ button.quick-add__button:hover {
   letter-spacing: 0.5px !important;
   color: #1C1917 !important;
 }
+
+/* ==========================================================================
+   FurniCraft Luxury Product Cards & Equal Height Grid Layout
+   ========================================================================== */
+.product-grid {
+  display: grid !important;
+  align-items: stretch !important;
+}
+
+/* Outer wrapper clean reset */
+.product-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Single clean card container */
+.product-grid__card,
+.product-card__content {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  justify-content: space-between !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e8e4e1 !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  padding: 14px !important;
+  margin: 0 !important;
+}
+
+.product-card:hover .product-grid__card,
+.product-grid__card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 28px rgba(44, 34, 30, 0.12) !important;
+  border-color: #734322 !important;
+}
+
+/* Uniform aspect-ratio for all product card images */
+.card-gallery,
+.product-card .card-gallery,
+.product-grid__card .card-gallery {
+  width: 100% !important;
+  aspect-ratio: 4 / 5 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 6px !important;
+  background-color: #f7f5f3 !important;
+  flex-shrink: 0 !important;
+}
+
+.card-gallery img,
+.product-card img,
+.product-media-container img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.product-card:hover .card-gallery img,
+.product-card:hover img {
+  transform: scale(1.05) !important;
+}
+
+/* Hide ONLY description / duplicate subtitle text */
+.product-card .product-description,
+.product-grid__card .product-description,
+.product-grid-view-zoom-out--details {
+  display: none !important;
+}
+
+/* Card Title Styling */
+.product-card h3,
+.product-card h4,
+.product-card .h4,
+.product-grid__card h3,
+.product-grid__card h4,
+.product-card p[role="heading"] {
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: #2C221E !important;
+  line-height: 1.35 !important;
+  margin: 8px 0 4px 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* Price Styling - Horizontal Flex Row & Smaller Cut Price */
+.product-card .price,
+.product-grid__card .price,
+.product-card [ref="priceContainer"],
+.product-grid__card [ref="priceContainer"],
+.product-card [class*="price"] {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: baseline !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-top: 6px !important;
+  margin-bottom: 4px !important;
+}
+
+/* Main Sale Price */
+.product-card .price-item__group.price,
+.product-grid__card .price-item__group.price,
+.product-card span.price,
+.product-card .price:not(.compare-at-price) {
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: #734322 !important;
+}
+
+/* Cut Price (Compare at Price) - Smaller Text & Muted Grey */
+.product-card .compare-at-price,
+.product-grid__card .compare-at-price,
+.product-card .price-item--regular,
+.product-card span.compare-at-price {
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  color: #888888 !important;
+  text-decoration: line-through !important;
+  opacity: 0.85 !important;
+}
+
+/* Sale Badge Styling */
+.product-badges__badge,
+.product-card .badge,
+.product-badges__badge--rectangle {
+  background-color: #734322 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  padding: 4px 10px !important;
+  border-radius: 4px !important;
+}
+
+/* Add to Cart / Quick Add Button Styling */
+.quick-add {
+  position: absolute !important;
+  inset: auto 12px 12px 12px !important;
+  z-index: 10 !important;
+  width: calc(100% - 24px) !important;
+  pointer-events: auto !important;
+}
+
+.quick-add__button,
+button.quick-add__button,
+.add-to-cart-button {
+  width: 100% !important;
+  background-color: #734322 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.8px !important;
+  text-transform: uppercase !important;
+  border-radius: 6px !important;
+  padding: 10px 16px !important;
+  height: auto !important;
+  min-height: 42px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(115, 67, 34, 0.25) !important;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+}
+
+button.quick-add__button:hover,
+.add-to-cart-button:hover {
+  background-color: #5B351B !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 16px rgba(91, 53, 27, 0.35) !important;
+}

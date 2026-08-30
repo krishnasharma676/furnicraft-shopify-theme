@@ -73,34 +73,40 @@
                   <h3 class="footer__col-heading">{{ block.settings.heading | escape }}</h3>
                 {%- endif -%}
                 {%- assign link_list = linklists[block.settings.menu] -%}
+                {%- if link_list == blank or link_list.links.size == 0 -%}
+                  {%- assign fallback_handle = block.settings.heading | handleize -%}
+                  {%- assign link_list = linklists[fallback_handle] -%}
+                {%- endif -%}
+                {%- if link_list == blank or link_list.links.size == 0 -%}
+                  {%- assign alt_handle = block.settings.heading | downcase | replace: ' ', '-' -%}
+                  {%- assign link_list = linklists[alt_handle] -%}
+                {%- endif -%}
                 <ul class="footer__menu-list">
-                  {%- if link_list != blank and link_list.links.size > 1 -%}
+                  {%- if link_list != blank and link_list.links.size > 0 -%}
                     {%- for link in link_list.links -%}
                       <li>
                         <a href="{{ link.url }}" class="footer__menu-link">{{ link.title | escape }}</a>
                       </li>
                     {%- endfor -%}
+                  {%- elsif block.settings.heading contains 'COLLECTION' -%}
+                    {%- for collection in collections limit: 6 -%}
+                      {%- unless collection.handle == 'frontpage' -%}
+                        <li>
+                          <a href="{{ collection.url }}" class="footer__menu-link">{{ collection.title | escape }}</a>
+                        </li>
+                      {%- endunless -%}
+                    {%- endfor -%}
+                  {%- elsif block.settings.heading contains 'CUSTOMER' -%}
+                    <li><a href="/policies/shipping-policy" class="footer__menu-link">Shipping Policy</a></li>
+                    <li><a href="/policies/refund-policy" class="footer__menu-link">Returns & Refunds</a></li>
+                    <li><a href="/policies/privacy-policy" class="footer__menu-link">Privacy Policy</a></li>
+                    <li><a href="/policies/terms-of-service" class="footer__menu-link">Terms & Conditions</a></li>
                   {%- else -%}
-                    {%- case block.settings.heading -%}
-                      {%- when 'COLLECTIONS' -%}
-                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Living Room</a></li>
-                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Bedroom</a></li>
-                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Dining Room</a></li>
-                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Office</a></li>
-                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Outdoor</a></li>
-                        <li><a href="{{ routes.collections_url }}" class="footer__menu-link">New Arrivals</a></li>
-                      {%- when 'CUSTOMER SERVICE' -%}
-                        <li><a href="/policies/shipping-policy" class="footer__menu-link">Shipping Policy</a></li>
-                        <li><a href="/policies/refund-policy" class="footer__menu-link">Returns & Refunds</a></li>
-                        <li><a href="/policies/privacy-policy" class="footer__menu-link">Privacy Policy</a></li>
-                        <li><a href="/policies/terms-of-service" class="footer__menu-link">Terms & Conditions</a></li>
-                      {%- else -%}
-                        <li><a href="/pages/about" class="footer__menu-link">About Us</a></li>
-                        <li><a href="/pages/contact" class="footer__menu-link">Contact Us</a></li>
-                        <li><a href="/pages/contact" class="footer__menu-link">Bulk Orders</a></li>
-                        <li><a href="/pages/faq" class="footer__menu-link">FAQ</a></li>
-                        <li><a href="/pages/track-order" class="footer__menu-link">Track Order</a></li>
-                    {%- endcase -%}
+                    <li><a href="/pages/about" class="footer__menu-link">About Us</a></li>
+                    <li><a href="/pages/contact" class="footer__menu-link">Contact Us</a></li>
+                    <li><a href="/pages/contact" class="footer__menu-link">Bulk Orders</a></li>
+                    <li><a href="/pages/faq" class="footer__menu-link">FAQ</a></li>
+                    <li><a href="/pages/track-order" class="footer__menu-link">Track Order</a></li>
                   {%- endif -%}
                 </ul>
               </div>
@@ -171,12 +177,22 @@
         <div class="footer__col footer__col--menu">
           <h3 class="footer__col-heading">COLLECTIONS</h3>
           <ul class="footer__menu-list">
-            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Living Room</a></li>
-            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Bedroom</a></li>
-            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Dining Room</a></li>
-            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Office</a></li>
-            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">Outdoor</a></li>
-            <li><a href="{{ routes.collections_url }}" class="footer__menu-link">New Arrivals</a></li>
+        <!-- Default Fallback Column 2: COLLECTIONS -->
+        <div class="footer__col footer__col--menu">
+          <h3 class="footer__col-heading">COLLECTIONS</h3>
+          <ul class="footer__menu-list">
+            {%- assign coll_list = linklists['collections'] -%}
+            {%- if coll_list != blank and coll_list.links.size > 0 -%}
+              {%- for link in coll_list.links -%}
+                <li><a href="{{ link.url }}" class="footer__menu-link">{{ link.title | escape }}</a></li>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for collection in collections limit: 6 -%}
+                {%- unless collection.handle == 'frontpage' -%}
+                  <li><a href="{{ collection.url }}" class="footer__menu-link">{{ collection.title | escape }}</a></li>
+                {%- endunless -%}
+              {%- endfor -%}
+            {%- endif -%}
           </ul>
         </div>
 
@@ -184,11 +200,18 @@
         <div class="footer__col footer__col--menu">
           <h3 class="footer__col-heading">QUICK LINKS</h3>
           <ul class="footer__menu-list">
-            <li><a href="/pages/about" class="footer__menu-link">About Us</a></li>
-            <li><a href="/pages/contact" class="footer__menu-link">Contact Us</a></li>
-            <li><a href="/pages/contact" class="footer__menu-link">Bulk Orders</a></li>
-            <li><a href="/pages/faq" class="footer__menu-link">FAQ</a></li>
-            <li><a href="/pages/track-order" class="footer__menu-link">Track Order</a></li>
+            {%- assign q_list = linklists['quick-links'] -%}
+            {%- if q_list != blank and q_list.links.size > 0 -%}
+              {%- for link in q_list.links -%}
+                <li><a href="{{ link.url }}" class="footer__menu-link">{{ link.title | escape }}</a></li>
+              {%- endfor -%}
+            {%- else -%}
+              <li><a href="/pages/about" class="footer__menu-link">About Us</a></li>
+              <li><a href="/pages/contact" class="footer__menu-link">Contact Us</a></li>
+              <li><a href="/pages/contact" class="footer__menu-link">Bulk Orders</a></li>
+              <li><a href="/pages/faq" class="footer__menu-link">FAQ</a></li>
+              <li><a href="/pages/track-order" class="footer__menu-link">Track Order</a></li>
+            {%- endif -%}
           </ul>
         </div>
 
@@ -196,10 +219,17 @@
         <div class="footer__col footer__col--menu">
           <h3 class="footer__col-heading">CUSTOMER SERVICE</h3>
           <ul class="footer__menu-list">
-            <li><a href="/policies/shipping-policy" class="footer__menu-link">Shipping Policy</a></li>
-            <li><a href="/policies/refund-policy" class="footer__menu-link">Returns & Refunds</a></li>
-            <li><a href="/policies/privacy-policy" class="footer__menu-link">Privacy Policy</a></li>
-            <li><a href="/policies/terms-of-service" class="footer__menu-link">Terms & Conditions</a></li>
+            {%- assign cs_list = linklists['customer-service'] -%}
+            {%- if cs_list != blank and cs_list.links.size > 0 -%}
+              {%- for link in cs_list.links -%}
+                <li><a href="{{ link.url }}" class="footer__menu-link">{{ link.title | escape }}</a></li>
+              {%- endfor -%}
+            {%- else -%}
+              <li><a href="/policies/shipping-policy" class="footer__menu-link">Shipping Policy</a></li>
+              <li><a href="/policies/refund-policy" class="footer__menu-link">Returns & Refunds</a></li>
+              <li><a href="/policies/privacy-policy" class="footer__menu-link">Privacy Policy</a></li>
+              <li><a href="/policies/terms-of-service" class="footer__menu-link">Terms & Conditions</a></li>
+            {%- endif -%}
           </ul>
         </div>
 
