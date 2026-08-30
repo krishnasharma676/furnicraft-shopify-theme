@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer Group",
@@ -14,27 +23,6 @@
             "show_social": true
           }
         },
-        "collections_menu": {
-          "type": "menu",
-          "settings": {
-            "heading": "COLLECTIONS",
-            "menu": "footer"
-          }
-        },
-        "quick_links_menu": {
-          "type": "menu",
-          "settings": {
-            "heading": "QUICK LINKS",
-            "menu": "footer"
-          }
-        },
-        "customer_service_menu": {
-          "type": "menu",
-          "settings": {
-            "heading": "CUSTOMER SERVICE",
-            "menu": "footer"
-          }
-        },
         "contact_info": {
           "type": "contact",
           "settings": {
@@ -47,16 +35,14 @@
       },
       "block_order": [
         "brand_info",
-        "collections_menu",
-        "quick_links_menu",
-        "customer_service_menu",
         "contact_info"
       ],
       "settings": {
         "show_instagram_bar": true,
         "instagram_text": "FOLLOW US @FURNICRAFT",
-        "background_color": "#2C221E",
-        "text_color": "#FFFFFF",
+        "instagram_url": "",
+        "background_color": "#2c221e",
+        "text_color": "#ffffff",
         "copyright_text": "All Rights Reserved.",
         "show_payment_icons": true
       }
