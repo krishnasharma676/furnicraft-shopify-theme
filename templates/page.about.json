@@ -9,12 +9,10 @@
         "image_position": "right",
         "button_1_label": "EXPLORE COLLECTIONS",
         "button_1_url": "/collections/all",
-        "button_2_label": "TALK TO DESIGNERS",
+        "button_2_label": "DESIGN CONSULTATION",
         "button_2_url": "/pages/contact",
         "show_trust_pills": true,
-        "floating_card_title": "Artisan Certified",
-        "floating_card_sub": "100% Handcrafted Joinery",
-        "background_color": "#FDFBF7",
+        "background_color": "#FAF8F5",
         "text_color": "#1C1917",
         "accent_color": "#824E2B"
       }
@@ -28,7 +26,7 @@
             "icon": "home",
             "stat_number": "15,000+",
             "stat_label": "Homes Furnished",
-            "stat_subtext": "Across India & International"
+            "stat_subtext": "Across India & Global"
           }
         },
         "stat_2": {
@@ -36,8 +34,8 @@
           "settings": {
             "icon": "artisan",
             "stat_number": "30+",
-            "stat_label": "Master Artisans",
-            "stat_subtext": "Decades of joinery mastery"
+            "stat_label": "Master Carpenters",
+            "stat_subtext": "Generations of joinery"
           }
         },
         "stat_3": {
@@ -45,8 +43,8 @@
           "settings": {
             "icon": "leaf",
             "stat_number": "100%",
-            "stat_label": "Sustainable Timber",
-            "stat_subtext": "FSC certified plantation wood"
+            "stat_label": "Sustainable Hardwood",
+            "stat_subtext": "FSC certified plantation"
           }
         },
         "stat_4": {
@@ -55,7 +53,7 @@
             "icon": "shield",
             "stat_number": "10-Year",
             "stat_label": "Warranty Promise",
-            "stat_subtext": "Generational durability"
+            "stat_subtext": "Structural guarantee"
           }
         }
       },
@@ -66,10 +64,10 @@
         "stat_4"
       ],
       "settings": {
-        "badge_text": "BY THE NUMBERS",
-        "heading": "Numbers That Reflect Our Dedication",
-        "subheading": "Built on trust, sustainable forestry, and generations of craftsmanship.",
-        "background_color": "#2C221E",
+        "badge_text": "PROVEN EXCELLENCE • BY THE NUMBERS",
+        "heading": "Milestones Built On Trust & Precision",
+        "subheading": "Every number reflects countless hours of artisanal craftsmanship and delighted homes.",
+        "background_color": "#1C1917",
         "text_color": "#FFFFFF",
         "accent_color": "#D4A373"
       }
@@ -81,21 +79,21 @@
           "type": "feature_bullet",
           "settings": {
             "title": "Precision Hand-Joinery",
-            "description": "Engineered with classic mortise, tenon, and dovetail joints for lasting structural integrity."
+            "description": "Engineered with classic mortise, tenon, and dovetail joints for maximum strength."
           }
         },
         "bullet_2": {
           "type": "feature_bullet",
           "settings": {
             "title": "Natural Organic Finishes",
-            "description": "Zero harmful VOCs—treated with natural linseed and plant oils that enhance natural wood grain."
+            "description": "Zero harmful VOCs—treated with natural oils that enhance the organic wood grain."
           }
         },
         "bullet_3": {
           "type": "feature_bullet",
           "settings": {
-            "title": "Heirloom Generational Quality",
-            "description": "Furniture created not just for today, but to be passed down through generations."
+            "title": "Built for Generations",
+            "description": "Heirloom-grade furniture created to grow more beautiful with time and character."
           }
         }
       },
@@ -106,9 +104,9 @@
       ],
       "settings": {
         "layout": "image_first",
-        "badge_text": "ARTISAN HERITAGE",
-        "heading": "From Raw Timber To Refined Masterpieces",
-        "text": "<p>True luxury lies in the details you cannot always see. Our master carpenters hand-select seasoned logs, carving and joining each corner with time-honored methods that withstand decades of use.</p>",
+        "badge_text": "ARTISAN HERITAGE & PASSION",
+        "heading": "From Raw Timber To Heirloom Masterpieces",
+        "text": "<p>True luxury lies in the details you cannot always see. Our master carpenters hand-select seasoned logs, carving and joining each corner with time-honored methods that withstand decades of daily use.</p>",
         "exp_years": "15+",
         "exp_text": "Years of Woodworking Mastery",
         "cta_label": "EXPLORE OUR WORK",
@@ -134,7 +132,7 @@
           "type": "value_item",
           "settings": {
             "icon": "shield-check",
-            "title": "Artisan Craftsmanship",
+            "title": "Master Craftsmanship",
             "description": "Hand-joined by veteran carpenters with decades of mastery, resulting in unmatched strength and finish.",
             "highlight_tag": "Hand-Planed Finish"
           }
@@ -152,7 +150,7 @@
           "type": "value_item",
           "settings": {
             "icon": "scale",
-            "title": "Direct-to-Consumer Luxury",
+            "title": "Direct-to-Home Luxury",
             "description": "By eliminating retail showroom markups and middleman margins, we offer true heirloom quality at fair prices.",
             "highlight_tag": "No Middleman Markup"
           }
@@ -165,10 +163,10 @@
         "val_4"
       ],
       "settings": {
-        "badge_text": "WHAT WE STAND FOR",
+        "badge_text": "THE FURNICRAFT STANDARD",
         "heading": "Built On Uncompromising Principles",
-        "subheading": "Our philosophy guides every cut, joint, finish, and customer relationship.",
-        "background_color": "#FDFBF7",
+        "subheading": "Our philosophy guides every cut, joint, organic finish, and client relationship.",
+        "background_color": "#FAF8F5",
         "text_color": "#1C1917",
         "accent_color": "#824E2B"
       }
@@ -179,7 +177,7 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "title": "Architectural Blueprint",
+            "title": "Architectural Design",
             "description": "Every silhouette starts with precision hand-sketched blueprints focused on ergonomics, structural balance, and modern proportions.",
             "tag": "Phase 01 • Design & 3D"
           }
@@ -216,10 +214,10 @@
         "step_4"
       ],
       "settings": {
-        "badge_text": "HOW WE CREATE",
-        "heading": "Our Four-Stage Creation Journey",
-        "subheading": "From rough forest logs to the centerpiece of your living space.",
-        "background_color": "#2C221E",
+        "badge_text": "HOW WE CREATE • MASTER JOURNEY",
+        "heading": "The Four-Stage Creation Journey",
+        "subheading": "From raw sustainably harvested logs to the centerpiece of your living space.",
+        "background_color": "#1C1917",
         "text_color": "#FFFFFF",
         "accent_color": "#D4A373"
       }
@@ -229,7 +227,7 @@
       "settings": {
         "badge_text": "TRANSFORM YOUR SANCTUARY",
         "heading": "Ready To Bring Heirloom Luxury Into Your Home?",
-        "subheading": "Explore our curated living, bedroom, and dining collections, or reach out to our design consultants for bespoke custom orders.",
+        "subheading": "Explore our curated living, bedroom, and dining collections, or reach out to our design consultants for bespoke interior projects.",
         "button_1_label": "EXPLORE ALL COLLECTIONS",
         "button_1_url": "/collections/all",
         "button_2_label": "REQUEST A CUSTOM QUOTE",
