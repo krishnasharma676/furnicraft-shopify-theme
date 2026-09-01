@@ -1,0 +1,164 @@
+/* ==========================================================================
+   About Process Journey Styles
+   ========================================================================== */
+
+.about-process {
+  position: relative;
+  padding-block: clamp(64px, 8vw, 110px);
+  background-color: var(--process-bg, #1C1917);
+  overflow: hidden;
+}
+
+.about-process__header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto clamp(40px, 6vw, 68px) auto;
+}
+
+.about-process__badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--process-accent, #D4A373);
+  margin-bottom: 14px;
+}
+
+.about-process__title {
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--process-text, #FFFFFF);
+  margin: 0 0 14px 0;
+}
+
+.about-process__subtitle {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+}
+
+.about-process__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+  position: relative;
+}
+
+.process-step {
+  display: flex;
+  flex-direction: column;
+}
+
+.process-step__timeline-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.process-step__num-badge {
+  font-size: 1.1875rem;
+  font-weight: 800;
+  color: var(--process-accent, #D4A373);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(212, 163, 115, 0.14);
+  border: 2px solid var(--process-accent, #D4A373);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 16px rgba(212, 163, 115, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.process-step:hover .process-step__num-badge {
+  transform: scale(1.1);
+  background: var(--process-accent, #D4A373);
+  color: #1C1917;
+}
+
+.process-step__connector-line {
+  flex-grow: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--process-accent, #D4A373) 0%, rgba(255, 255, 255, 0.15) 100%);
+}
+
+.process-step:last-child .process-step__connector-line {
+  display: none;
+}
+
+.process-step__card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 30px 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+}
+
+.process-step:hover .process-step__card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border-color: var(--process-accent, #D4A373);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+}
+
+.process-step__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.process-step__desc {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0 0 20px 0;
+  flex-grow: 1;
+}
+
+.process-step__tag {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--process-accent, #D4A373);
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+  .about-process__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .process-step:nth-child(2) .process-step__connector-line {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-process__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .process-step__connector-line {
+    display: none;
+  }
+
+  .process-step__card {
+    padding: 24px 20px;
+  }
+}

@@ -1,0 +1,239 @@
+{{ 'section-about-story.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .about-story-{{ section.id }} {
+    --story-bg: {{ section.settings.background_color | default: '#FFFFFF' }};
+    --story-text: {{ section.settings.text_color | default: '#1C1917' }};
+    --story-accent: {{ section.settings.accent_color | default: '#824E2B' }};
+    background-color: var(--story-bg);
+    color: var(--story-text);
+  }
+{%- endstyle -%}
+
+<section class="about-story about-story-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="about-container">
+    <div class="about-story__grid {% if section.settings.layout == 'image_first' %}about-story__grid--image-first{% endif %}">
+      
+      <!-- Image Column -->
+      <div class="about-story__media about-reveal about-reveal--left">
+        <div class="about-story__image-wrap">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                class: 'about-story__main-img',
+                alt: section.settings.heading,
+                widths: '500, 800, 1000, 1200'
+            }}
+          {%- else -%}
+            <img
+              src="{{ 'about-craftsmanship.jpg' | asset_url }}"
+              alt="Artisan Woodworking Craftsmanship"
+              class="about-story__main-img"
+              loading="lazy"
+            />
+          {%- endif -%}
+
+          <div class="about-story__badge-card about-interactive-card">
+            <div class="badge-card__num">{{ section.settings.exp_years | default: '15+' }}</div>
+            <div class="badge-card__text">{{ section.settings.exp_text | default: 'Years of Woodworking Mastery' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text Column -->
+      <div class="about-story__content about-reveal about-reveal--right">
+        {%- if section.settings.badge_text != blank -%}
+          <div class="about-story__badge">
+            {{ section.settings.badge_text | escape }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="about-story__title">
+            {{ section.settings.heading | escape }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="about-story__description">
+            {{ section.settings.text }}
+          </div>
+        {%- endif -%}
+
+        <div class="about-story__features">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature_bullet' -%}
+              <div class="story-feature-card" {{ block.shopify_attributes }}>
+                <div class="story-feature-card__icon-wrap">
+                  <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                </div>
+                <div class="story-feature-card__content">
+                  <h4 class="story-feature-card__title">{{ block.settings.title | escape }}</h4>
+                  <p class="story-feature-card__desc">{{ block.settings.description | escape }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.cta_label != blank -%}
+          <div class="about-story__cta">
+            <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="about-btn about-btn--primary">
+              <span>{{ section.settings.cta_label | escape }}</span>
+              <svg class="about-btn__arrow" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          </div>
+        {%- endif -%}
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Craftsmanship Story",
+  "tag": "section",
+  "class": "section-about-story",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "image_first", "label": "Image on Left" },
+        { "value": "content_first", "label": "Image on Right" }
+      ],
+      "default": "image_first"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "ARTISAN HERITAGE & PASSION"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "From Raw Timber To Heirloom Masterpieces"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Description",
+      "default": "<p>True luxury lies in the details you cannot always see. Our master carpenters hand-select seasoned logs, carving and joining each corner with time-honored methods that withstand decades of daily use.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Story Image"
+    },
+    {
+      "type": "text",
+      "id": "exp_years",
+      "label": "Experience Years",
+      "default": "15+"
+    },
+    {
+      "type": "text",
+      "id": "exp_text",
+      "label": "Experience Tagline",
+      "default": "Years of Woodworking Mastery"
+    },
+    {
+      "type": "header",
+      "content": "CTA Button"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button Label",
+      "default": "EXPLORE OUR WORK"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1C1917"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#824E2B"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature_bullet",
+      "name": "Feature Bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature Title",
+          "default": "Precision Hand-Joinery"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Feature Description",
+          "default": "No weak fasteners—engineered with classic mortise, tenon, and dovetail joints."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Craftsmanship Story",
+      "blocks": [
+        {
+          "type": "feature_bullet",
+          "settings": {
+            "title": "Precision Hand-Joinery",
+            "description": "Engineered with classic mortise, tenon, and dovetail joints for maximum strength."
+          }
+        },
+        {
+          "type": "feature_bullet",
+          "settings": {
+            "title": "Natural Organic Finishes",
+            "description": "Zero harmful VOCs—treated with natural oils that enhance the organic wood grain."
+          }
+        },
+        {
+          "type": "feature_bullet",
+          "settings": {
+            "title": "Built for Generations",
+            "description": "Heirloom-grade furniture created to grow more beautiful with time and character."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

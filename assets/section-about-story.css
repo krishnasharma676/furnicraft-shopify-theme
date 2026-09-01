@@ -1,0 +1,191 @@
+/* ==========================================================================
+   About Craftsmanship Story Styles
+   ========================================================================== */
+
+.about-story {
+  position: relative;
+  padding-block: clamp(64px, 8vw, 110px);
+}
+
+.about-story__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6.5vw, 88px);
+  align-items: center;
+}
+
+.about-story__grid--image-first .about-story__media {
+  order: 1;
+}
+
+.about-story__grid--image-first .about-story__content {
+  order: 2;
+}
+
+.about-story__media {
+  order: 2;
+}
+
+.about-story__content {
+  order: 1;
+}
+
+.about-story__image-wrap {
+  position: relative;
+  border-radius: 20px;
+}
+
+.about-story__main-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.12);
+  display: block;
+}
+
+.about-story__badge-card {
+  position: absolute;
+  bottom: 24px;
+  right: -20px;
+  background: #2C221E;
+  color: #FFFFFF;
+  padding: 20px 24px;
+  border-radius: 14px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+  display: flex;
+  flex-direction: column;
+  border-left: 4px solid var(--story-accent, #824E2B);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.25s ease-out;
+  z-index: 2;
+}
+
+.badge-card__num {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #D4A373;
+}
+
+.badge-card__text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.about-story__badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--story-accent, #824E2B);
+  margin-bottom: 14px;
+}
+
+.about-story__title {
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--story-text, #1C1917);
+  margin: 0 0 20px 0;
+}
+
+.about-story__description {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(28, 25, 23, 0.75);
+  margin-bottom: 32px;
+}
+
+.about-story__description p {
+  margin: 0 0 14px 0;
+}
+
+.about-story__features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.story-feature-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #FAF8F5;
+  border: 1px solid rgba(28, 25, 23, 0.06);
+  border-radius: 12px;
+  padding: 16px 20px;
+  transition: all 0.25s ease;
+}
+
+.story-feature-card:hover {
+  background: #FFFFFF;
+  border-color: var(--story-accent, #824E2B);
+  box-shadow: 0 8px 24px rgba(130, 78, 43, 0.08);
+  transform: translateX(4px);
+}
+
+.story-feature-card__icon-wrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(130, 78, 43, 0.12);
+  color: var(--story-accent, #824E2B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.story-feature-card__icon-wrap svg {
+  width: 16px;
+  height: 16px;
+}
+
+.story-feature-card__title {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--story-text, #1C1917);
+  margin: 0 0 4px 0;
+}
+
+.story-feature-card__desc {
+  font-size: 0.84375rem;
+  line-height: 1.5;
+  color: rgba(28, 25, 23, 0.65);
+  margin: 0;
+}
+
+.about-story__cta {
+  display: flex;
+}
+
+/* Responsive */
+@media screen and (max-width: 989px) {
+  .about-story__grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .about-story__media,
+  .about-story__content,
+  .about-story__grid--image-first .about-story__media,
+  .about-story__grid--image-first .about-story__content {
+    order: unset;
+  }
+
+  .about-story__badge-card {
+    right: 10px;
+    bottom: -15px;
+    padding: 14px 18px;
+  }
+}

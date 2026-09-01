@@ -1,0 +1,194 @@
+{{ 'section-about-values.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .about-values-{{ section.id }} {
+    --values-bg: {{ section.settings.background_color | default: '#FAF8F5' }};
+    --values-text: {{ section.settings.text_color | default: '#1C1917' }};
+    --values-accent: {{ section.settings.accent_color | default: '#824E2B' }};
+    background-color: var(--values-bg);
+    color: var(--values-text);
+  }
+{%- endstyle -%}
+
+<section class="about-values about-values-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="about-container">
+    
+    <div class="about-values__header about-reveal">
+      {%- if section.settings.badge_text != blank -%}
+        <span class="about-values__badge">{{ section.settings.badge_text | escape }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="about-values__title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="about-values__subtitle">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="about-values__grid">
+      {%- for block in section.blocks -%}
+        <div class="value-card about-interactive-card about-reveal" style="transition-delay: {{ forloop.index0 | times: 100 }}ms;" {{ block.shopify_attributes }}>
+          <div class="value-card__top-bar"></div>
+          
+          <div class="value-card__icon-wrap">
+            {%- case block.settings.icon -%}
+              {%- when 'tree' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22v-7"/><path d="M12 2l-6 6h4l-5 6h4l-4 5h14l-4-5h4l-5-6h4z"/></svg>
+              {%- when 'shield-check' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              {%- when 'sparkles' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+              {%- when 'heart-hand' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              {%- when 'scale' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+              {%- when 'truck' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            {%- endcase -%}
+          </div>
+
+          <h3 class="value-card__title">{{ block.settings.title | escape }}</h3>
+          <p class="value-card__description">{{ block.settings.description | escape }}</p>
+          
+          {%- if block.settings.highlight_tag != blank -%}
+            <span class="value-card__tag">{{ block.settings.highlight_tag | escape }}</span>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Core Pillars",
+  "tag": "section",
+  "class": "section-about-values",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "THE FURNICRAFT STANDARD"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built On Uncompromising Principles"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Our philosophy guides every cut, joint, organic finish, and client relationship."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FAF8F5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1C1917"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#824E2B"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value_item",
+      "name": "Value Pillar",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "tree", "label": "Tree / Sustainable Forest" },
+            { "value": "shield-check", "label": "Shield / Quality Guarantee" },
+            { "value": "sparkles", "label": "Sparkles / Timeless Design" },
+            { "value": "heart-hand", "label": "Heart / Customer Care" },
+            { "value": "scale", "label": "Fair Pricing / Direct" },
+            { "value": "truck", "label": "Careful Delivery" }
+          ],
+          "default": "tree"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Sustainably Sourced Hardwoods"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "We exclusively harvest from responsibly managed plantations, guaranteeing environmental harmony and zero deforestation."
+        },
+        {
+          "type": "text",
+          "id": "highlight_tag",
+          "label": "Highlight Badge",
+          "default": "FSC Certified"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Core Pillars",
+      "blocks": [
+        {
+          "type": "value_item",
+          "settings": {
+            "icon": "tree",
+            "title": "Sustainable Hardwoods",
+            "description": "We exclusively harvest from responsibly managed plantations, guaranteeing environmental harmony and zero deforestation.",
+            "highlight_tag": "100% Ethical Timber"
+          }
+        },
+        {
+          "type": "value_item",
+          "settings": {
+            "icon": "shield-check",
+            "title": "Master Craftsmanship",
+            "description": "Hand-joined by veteran carpenters with decades of mastery, resulting in unmatched strength and finish.",
+            "highlight_tag": "Hand-Planed Finish"
+          }
+        },
+        {
+          "type": "value_item",
+          "settings": {
+            "icon": "sparkles",
+            "title": "Timeless Modern Design",
+            "description": "Thoughtful proportions designed to seamlessly complement modern apartments and heritage homes alike.",
+            "highlight_tag": "Architectural Aesthetic"
+          }
+        },
+        {
+          "type": "value_item",
+          "settings": {
+            "icon": "scale",
+            "title": "Direct-to-Home Luxury",
+            "description": "By eliminating retail showroom markups and middleman margins, we offer true heirloom quality at fair prices.",
+            "highlight_tag": "No Middleman Markup"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,206 @@
+{{ 'section-about-stats.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .about-stats-{{ section.id }} {
+    --stats-bg: {{ section.settings.background_color | default: '#1C1917' }};
+    --stats-text: {{ section.settings.text_color | default: '#FFFFFF' }};
+    --stats-accent: {{ section.settings.accent_color | default: '#D4A373' }};
+    background-color: var(--stats-bg);
+    color: var(--stats-text);
+  }
+{%- endstyle -%}
+
+<section class="about-stats about-stats-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="about-container">
+    
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="about-stats__header about-reveal">
+        {%- if section.settings.badge_text != blank -%}
+          <span class="about-stats__badge">{{ section.settings.badge_text | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="about-stats__title">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="about-stats__subtitle">{{ section.settings.subheading | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="about-stats__grid">
+      {%- for block in section.blocks -%}
+        <div class="about-stat-card about-interactive-card about-reveal" style="transition-delay: {{ forloop.index0 | times: 120 }}ms;" {{ block.shopify_attributes }}>
+          <div class="about-stat-card__glow-line"></div>
+          <div class="about-stat-card__inner">
+            {%- if block.settings.icon != blank -%}
+              <div class="about-stat-card__icon">
+                {%- case block.settings.icon -%}
+                  {%- when 'home' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  {%- when 'artisan' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                  {%- when 'leaf' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                  {%- when 'shield' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                  {%- when 'award' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+                  {%- when 'truck' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                {%- endcase -%}
+              </div>
+            {%- endif -%}
+
+            <div class="about-stat-card__number" data-target="{{ block.settings.stat_number | escape }}">
+              {{ block.settings.stat_number | escape }}
+            </div>
+            
+            <div class="about-stat-card__label">
+              {{ block.settings.stat_label | escape }}
+            </div>
+
+            {%- if block.settings.stat_subtext != blank -%}
+              <div class="about-stat-card__subtext">
+                {{ block.settings.stat_subtext | escape }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Stats Showcase",
+  "tag": "section",
+  "class": "section-about-stats",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "PROVEN EXCELLENCE • BY THE NUMBERS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Milestones Built On Trust & Precision"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Every number reflects countless hours of artisanal craftsmanship and delighted homes."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#1C1917"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#D4A373"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat_item",
+      "name": "Stat Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "home", "label": "Home / Living" },
+            { "value": "artisan", "label": "Artisan / Tools" },
+            { "value": "leaf", "label": "Eco / Sustainable Leaf" },
+            { "value": "shield", "label": "Warranty / Shield" },
+            { "value": "award", "label": "Award / Badge" },
+            { "value": "truck", "label": "Delivery / Shipping" }
+          ],
+          "default": "home"
+        },
+        {
+          "type": "text",
+          "id": "stat_number",
+          "label": "Stat Metric",
+          "default": "15,000+"
+        },
+        {
+          "type": "text",
+          "id": "stat_label",
+          "label": "Stat Label",
+          "default": "Homes Furnished"
+        },
+        {
+          "type": "text",
+          "id": "stat_subtext",
+          "label": "Description",
+          "default": "With bespoke luxury"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Stats Showcase",
+      "blocks": [
+        {
+          "type": "stat_item",
+          "settings": {
+            "icon": "home",
+            "stat_number": "15,000+",
+            "stat_label": "Homes Furnished",
+            "stat_subtext": "Across India & Global"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "icon": "artisan",
+            "stat_number": "30+",
+            "stat_label": "Master Carpenters",
+            "stat_subtext": "Generations of joinery"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "icon": "leaf",
+            "stat_number": "100%",
+            "stat_label": "Sustainable Hardwood",
+            "stat_subtext": "FSC certified plantation"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "icon": "shield",
+            "stat_number": "10-Year",
+            "stat_label": "Warranty Promise",
+            "stat_subtext": "Structural guarantee"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
