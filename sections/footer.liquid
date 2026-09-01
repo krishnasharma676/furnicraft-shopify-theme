@@ -25,6 +25,16 @@
 
   <div class="footer__main footer-container">
     <div class="footer__grid">
+      {%- liquid
+        assign has_menu_blocks = false
+        for block in section.blocks
+          if block.type == 'menu'
+            assign has_menu_blocks = true
+            break
+          endif
+        endfor
+      -%}
+
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
           {%- case block.type -%}
@@ -66,6 +76,60 @@
                   </div>
                 {%- endif -%}
               </div>
+
+              {%- unless has_menu_blocks -%}
+                {%- assign footer_menu = linklists['footer'] -%}
+                {%- if footer_menu != blank and footer_menu.links.size > 0 -%}
+                  {%- for parent_link in footer_menu.links -%}
+                    <div class="footer__col footer__col--menu">
+                      <h3 class="footer__col-heading">{{ parent_link.title | upcase | escape }}</h3>
+                      <ul class="footer__menu-list">
+                        {%- if parent_link.links.size > 0 -%}
+                          {%- for child_link in parent_link.links -%}
+                            <li>
+                              <a href="{{ child_link.url }}" class="footer__menu-link">{{ child_link.title | escape }}</a>
+                            </li>
+                          {%- endfor -%}
+                        {%- else -%}
+                          <li>
+                            <a href="{{ parent_link.url }}" class="footer__menu-link">{{ parent_link.title | escape }}</a>
+                          </li>
+                        {%- endif -%}
+                      </ul>
+                    </div>
+                  {%- endfor -%}
+                {%- else -%}
+                  <div class="footer__col footer__col--menu">
+                    <h3 class="footer__col-heading">COLLECTIONS</h3>
+                    <ul class="footer__menu-list">
+                      {%- for collection in collections limit: 6 -%}
+                        {%- unless collection.handle == 'frontpage' -%}
+                          <li><a href="{{ collection.url }}" class="footer__menu-link">{{ collection.title | escape }}</a></li>
+                        {%- endunless -%}
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                  <div class="footer__col footer__col--menu">
+                    <h3 class="footer__col-heading">QUICK LINKS</h3>
+                    <ul class="footer__menu-list">
+                      <li><a href="/pages/about" class="footer__menu-link">About Us</a></li>
+                      <li><a href="/pages/contact" class="footer__menu-link">Contact Us</a></li>
+                      <li><a href="/pages/contact" class="footer__menu-link">Bulk Orders</a></li>
+                      <li><a href="/pages/faq" class="footer__menu-link">FAQ</a></li>
+                      <li><a href="/pages/track-order" class="footer__menu-link">Track Order</a></li>
+                    </ul>
+                  </div>
+                  <div class="footer__col footer__col--menu">
+                    <h3 class="footer__col-heading">CUSTOMER SERVICE</h3>
+                    <ul class="footer__menu-list">
+                      <li><a href="/policies/shipping-policy" class="footer__menu-link">Shipping Policy</a></li>
+                      <li><a href="/policies/refund-policy" class="footer__menu-link">Returns & Refunds</a></li>
+                      <li><a href="/policies/privacy-policy" class="footer__menu-link">Privacy Policy</a></li>
+                      <li><a href="/policies/terms-of-service" class="footer__menu-link">Terms & Conditions</a></li>
+                    </ul>
+                  </div>
+                {%- endif -%}
+              {%- endunless -%}
 
             {%- when 'menu' -%}
               <div class="footer__col footer__col--menu" {{ block.shopify_attributes }}>
@@ -173,65 +237,57 @@
           </div>
         </div>
 
-        <!-- Default Fallback Column 2: COLLECTIONS -->
-        <div class="footer__col footer__col--menu">
-          <h3 class="footer__col-heading">COLLECTIONS</h3>
-          <ul class="footer__menu-list">
-        <!-- Default Fallback Column 2: COLLECTIONS -->
-        <div class="footer__col footer__col--menu">
-          <h3 class="footer__col-heading">COLLECTIONS</h3>
-          <ul class="footer__menu-list">
-            {%- assign coll_list = linklists['collections'] -%}
-            {%- if coll_list != blank and coll_list.links.size > 0 -%}
-              {%- for link in coll_list.links -%}
-                <li><a href="{{ link.url }}" class="footer__menu-link">{{ link.title | escape }}</a></li>
-              {%- endfor -%}
-            {%- else -%}
+        {%- assign footer_menu = linklists['footer'] -%}
+        {%- if footer_menu != blank and footer_menu.links.size > 0 -%}
+          {%- for parent_link in footer_menu.links -%}
+            <div class="footer__col footer__col--menu">
+              <h3 class="footer__col-heading">{{ parent_link.title | upcase | escape }}</h3>
+              <ul class="footer__menu-list">
+                {%- if parent_link.links.size > 0 -%}
+                  {%- for child_link in parent_link.links -%}
+                    <li>
+                      <a href="{{ child_link.url }}" class="footer__menu-link">{{ child_link.title | escape }}</a>
+                    </li>
+                  {%- endfor -%}
+                {%- else -%}
+                  <li>
+                    <a href="{{ parent_link.url }}" class="footer__menu-link">{{ parent_link.title | escape }}</a>
+                  </li>
+                {%- endif -%}
+              </ul>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="footer__col footer__col--menu">
+            <h3 class="footer__col-heading">COLLECTIONS</h3>
+            <ul class="footer__menu-list">
               {%- for collection in collections limit: 6 -%}
                 {%- unless collection.handle == 'frontpage' -%}
                   <li><a href="{{ collection.url }}" class="footer__menu-link">{{ collection.title | escape }}</a></li>
                 {%- endunless -%}
               {%- endfor -%}
-            {%- endif -%}
-          </ul>
-        </div>
-
-        <!-- Default Fallback Column 3: QUICK LINKS -->
-        <div class="footer__col footer__col--menu">
-          <h3 class="footer__col-heading">QUICK LINKS</h3>
-          <ul class="footer__menu-list">
-            {%- assign q_list = linklists['quick-links'] -%}
-            {%- if q_list != blank and q_list.links.size > 0 -%}
-              {%- for link in q_list.links -%}
-                <li><a href="{{ link.url }}" class="footer__menu-link">{{ link.title | escape }}</a></li>
-              {%- endfor -%}
-            {%- else -%}
+            </ul>
+          </div>
+          <div class="footer__col footer__col--menu">
+            <h3 class="footer__col-heading">QUICK LINKS</h3>
+            <ul class="footer__menu-list">
               <li><a href="/pages/about" class="footer__menu-link">About Us</a></li>
               <li><a href="/pages/contact" class="footer__menu-link">Contact Us</a></li>
               <li><a href="/pages/contact" class="footer__menu-link">Bulk Orders</a></li>
               <li><a href="/pages/faq" class="footer__menu-link">FAQ</a></li>
               <li><a href="/pages/track-order" class="footer__menu-link">Track Order</a></li>
-            {%- endif -%}
-          </ul>
-        </div>
-
-        <!-- Default Fallback Column 4: CUSTOMER SERVICE -->
-        <div class="footer__col footer__col--menu">
-          <h3 class="footer__col-heading">CUSTOMER SERVICE</h3>
-          <ul class="footer__menu-list">
-            {%- assign cs_list = linklists['customer-service'] -%}
-            {%- if cs_list != blank and cs_list.links.size > 0 -%}
-              {%- for link in cs_list.links -%}
-                <li><a href="{{ link.url }}" class="footer__menu-link">{{ link.title | escape }}</a></li>
-              {%- endfor -%}
-            {%- else -%}
+            </ul>
+          </div>
+          <div class="footer__col footer__col--menu">
+            <h3 class="footer__col-heading">CUSTOMER SERVICE</h3>
+            <ul class="footer__menu-list">
               <li><a href="/policies/shipping-policy" class="footer__menu-link">Shipping Policy</a></li>
               <li><a href="/policies/refund-policy" class="footer__menu-link">Returns & Refunds</a></li>
               <li><a href="/policies/privacy-policy" class="footer__menu-link">Privacy Policy</a></li>
               <li><a href="/policies/terms-of-service" class="footer__menu-link">Terms & Conditions</a></li>
-            {%- endif -%}
-          </ul>
-        </div>
+            </ul>
+          </div>
+        {%- endif -%}
 
         <!-- Default Fallback Column 5: CONTACT -->
         <div class="footer__col footer__col--contact">
