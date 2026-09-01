@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "section": {
       "type": "section",
@@ -80,14 +81,14 @@
         "background_color": "{{ settings.color_palette.background }}",
         "video_position": "cover",
         "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
         "toggle_overlay": false,
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0,
         "padding-block-start": 48,
         "padding-block-end": 48
       }
@@ -170,6 +171,13 @@
               },
               "blocks": {}
             },
+            "review_block_collection": {
+              "type": "review",
+              "settings": {
+                "show_number": true,
+                "alignment": "left"
+              }
+            },
             "price_EzJzMm": {
               "type": "price",
               "settings": {
@@ -195,6 +203,7 @@
           "block_order": [
             "card-gallery",
             "product_title_4nY4eT",
+            "review_block_collection",
             "price_EzJzMm"
           ]
         }

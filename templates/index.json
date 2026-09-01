@@ -223,6 +223,7 @@
       ],
       "settings": {
         "heading": "SHOP BY CATEGORY",
+        "show_all_collections": true,
         "show_view_all": true,
         "view_all_text": "VIEW ALL CATEGORIES",
         "view_all_link": ""
@@ -428,6 +429,13 @@
               },
               "blocks": {}
             },
+            "review_block_index": {
+              "type": "review",
+              "settings": {
+                "show_number": true,
+                "alignment": "left"
+              }
+            },
             "price_JQzVV4": {
               "type": "price",
               "name": "t:names.product_price",
@@ -455,6 +463,7 @@
           "block_order": [
             "product_card_gallery_677WP3",
             "product_title_YXxMTj",
+            "review_block_index",
             "price_JQzVV4"
           ]
         }

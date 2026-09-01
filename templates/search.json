@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "search": {
       "type": "search-header",
@@ -127,6 +128,13 @@
               },
               "blocks": {}
             },
+            "review_block_search": {
+              "type": "review",
+              "settings": {
+                "show_number": true,
+                "alignment": "left"
+              }
+            },
             "price_fYkUgG": {
               "type": "price",
               "name": "t:names.product_price",
@@ -153,6 +161,7 @@
           "block_order": [
             "product_card_gallery_cFExAi",
             "product_title_j7qXTx",
+            "review_block_search",
             "price_fYkUgG"
           ]
         }

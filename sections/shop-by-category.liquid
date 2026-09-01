@@ -15,86 +15,174 @@
       {%- endif -%}
     {%- endfor -%}
 
-    <div class="shop-by-category__grid">
-      {%- if assigned_count > 0 -%}
-        {%- for block in section.blocks -%}
-          {%- assign collection = block.settings.collection -%}
-          {%- if collection != blank -%}
-            {%- assign category_title = block.settings.title -%}
-            {%- if category_title == blank -%}
-              {%- assign category_title = collection.title -%}
-            {%- endif -%}
-            {%- assign category_url = collection.url -%}
-            {%- assign category_image = block.settings.custom_image -%}
-            {%- if category_image == blank -%}
-              {%- assign category_image = collection.featured_image -%}
-            {%- endif -%}
-            {%- if category_image == blank -%}
-              {%- assign category_image = collection.products.first.featured_image -%}
-            {%- endif -%}
+    {%- assign show_all = section.settings.show_all_collections -%}
+    {%- if show_all == nil -%}
+      {%- assign show_all = true -%}
+    {%- endif -%}
 
-            <div class="shop-by-category__item" {{ block.shopify_attributes }}>
-              <a href="{{ category_url }}" class="category-card">
-                <div class="category-card__image-wrapper">
-                  {%- if category_image != blank -%}
-                    {{
-                      category_image
-                      | image_url: width: 500
-                      | image_tag:
-                        loading: 'lazy',
-                        sizes: '(min-width: 1025px) 260px, (min-width: 641px) 320px, 45vw',
-                        widths: '200, 300, 400, 500',
-                        class: 'category-card__image',
-                        alt: category_title
-                    }}
-                  {%- else -%}
-                    <div class="category-card__placeholder">
-                      {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg category-card__image' }}
-                    </div>
-                  {%- endif -%}
-                </div>
-                <span class="category-card__title">{{ category_title | escape }}</span>
-              </a>
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
-      {%- else -%}
-        {%- for col in collections -%}
-          {%- unless col.handle == 'frontpage' or col.handle == 'all' -%}
-            {%- assign category_title = col.title -%}
-            {%- assign category_url = col.url -%}
-            {%- assign category_image = col.featured_image -%}
-            {%- if category_image == blank -%}
-              {%- assign category_image = col.products.first.featured_image -%}
-            {%- endif -%}
+    <div class="shop-by-category__slider-wrapper">
+      <button type="button" class="shop-by-category__arrow shop-by-category__arrow--prev" aria-label="Previous categories" style="display: none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
 
-            <div class="shop-by-category__item">
-              <a href="{{ category_url }}" class="category-card">
-                <div class="category-card__image-wrapper">
-                  {%- if category_image != blank -%}
-                    {{
-                      category_image
-                      | image_url: width: 500
-                      | image_tag:
-                        loading: 'lazy',
-                        sizes: '(min-width: 1025px) 260px, (min-width: 641px) 320px, 45vw',
-                        widths: '200, 300, 400, 500',
-                        class: 'category-card__image',
-                        alt: category_title
-                    }}
-                  {%- else -%}
-                    <div class="category-card__placeholder">
-                      {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg category-card__image' }}
-                    </div>
-                  {%- endif -%}
-                </div>
-                <span class="category-card__title">{{ category_title | escape }}</span>
-              </a>
-            </div>
-          {%- endunless -%}
-        {%- endfor -%}
-      {%- endif -%}
+      <div class="shop-by-category__grid" id="ShopByCategoryGrid-{{ section.id }}">
+        {%- if show_all or assigned_count == 0 -%}
+          {%- for col in collections -%}
+            {%- unless col.handle == 'frontpage' or col.handle == 'all' -%}
+              {%- assign category_title = col.title -%}
+              {%- assign category_url = col.url -%}
+              {%- assign category_image = col.image -%}
+              {%- if category_image == blank -%}
+                {%- assign category_image = col.featured_image -%}
+              {%- endif -%}
+              {%- if category_image == blank -%}
+                {%- assign category_image = col.products.first.featured_image -%}
+              {%- endif -%}
+
+              <div class="shop-by-category__item">
+                <a href="{{ category_url }}" class="category-card">
+                  <div class="category-card__image-wrapper">
+                    {%- if category_image != blank -%}
+                      {{
+                        category_image
+                        | image_url: width: 400
+                        | image_tag:
+                          loading: 'lazy',
+                          sizes: '(min-width: 1025px) 220px, (min-width: 768px) 180px, 40vw',
+                          widths: '180, 240, 320, 400',
+                          class: 'category-card__image',
+                          alt: category_title
+                      }}
+                    {%- else -%}
+                      <div class="category-card__placeholder">
+                        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg category-card__image' }}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                  <span class="category-card__title">{{ category_title | escape }}</span>
+                </a>
+              </div>
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            {%- assign collection = block.settings.collection -%}
+            {%- if collection != blank -%}
+              {%- assign category_title = block.settings.title -%}
+              {%- if category_title == blank -%}
+                {%- assign category_title = collection.title -%}
+              {%- endif -%}
+              {%- assign category_url = collection.url -%}
+              {%- assign category_image = block.settings.custom_image -%}
+              {%- if category_image == blank -%}
+                {%- assign category_image = collection.image -%}
+              {%- endif -%}
+              {%- if category_image == blank -%}
+                {%- assign category_image = collection.featured_image -%}
+              {%- endif -%}
+              {%- if category_image == blank -%}
+                {%- assign category_image = collection.products.first.featured_image -%}
+              {%- endif -%}
+
+              <div class="shop-by-category__item" {{ block.shopify_attributes }}>
+                <a href="{{ category_url }}" class="category-card">
+                  <div class="category-card__image-wrapper">
+                    {%- if category_image != blank -%}
+                      {{
+                        category_image
+                        | image_url: width: 400
+                        | image_tag:
+                          loading: 'lazy',
+                          sizes: '(min-width: 1025px) 220px, (min-width: 768px) 180px, 40vw',
+                          widths: '180, 240, 320, 400',
+                          class: 'category-card__image',
+                          alt: category_title
+                      }}
+                    {%- else -%}
+                      <div class="category-card__placeholder">
+                        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg category-card__image' }}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                  <span class="category-card__title">{{ category_title | escape }}</span>
+                </a>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      <button type="button" class="shop-by-category__arrow shop-by-category__arrow--next" aria-label="Next categories" style="display: none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
     </div>
+
+    <script>
+      (function() {
+        function initCategorySliders() {
+          document.querySelectorAll('.shop-by-category__slider-wrapper').forEach(function(wrapper) {
+            var grid = wrapper.querySelector('.shop-by-category__grid');
+            var prevBtn = wrapper.querySelector('.shop-by-category__arrow--prev');
+            var nextBtn = wrapper.querySelector('.shop-by-category__arrow--next');
+            if (!grid) return;
+
+            function updateArrows() {
+              if (!prevBtn || !nextBtn) return;
+              var maxScroll = grid.scrollWidth - grid.clientWidth;
+              var hasOverflow = maxScroll > 6;
+
+              if (!hasOverflow) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+                grid.classList.remove('has-overflow');
+              } else {
+                prevBtn.style.display = '';
+                nextBtn.style.display = '';
+                grid.classList.add('has-overflow');
+                prevBtn.disabled = grid.scrollLeft <= 4;
+                nextBtn.disabled = grid.scrollLeft >= maxScroll - 4;
+              }
+            }
+
+            if (prevBtn && !prevBtn._hasCategoryListener) {
+              prevBtn._hasCategoryListener = true;
+              prevBtn.addEventListener('click', function() {
+                var scrollAmount = Math.max(grid.clientWidth * 0.6, 200);
+                grid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+              });
+            }
+
+            if (nextBtn && !nextBtn._hasCategoryListener) {
+              nextBtn._hasCategoryListener = true;
+              nextBtn.addEventListener('click', function() {
+                var scrollAmount = Math.max(grid.clientWidth * 0.6, 200);
+                grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+              });
+            }
+
+            if (!grid._hasCategoryScrollListener) {
+              grid._hasCategoryScrollListener = true;
+              grid.addEventListener('scroll', updateArrows, { passive: true });
+              window.addEventListener('resize', updateArrows);
+            }
+
+            setTimeout(updateArrows, 100);
+            updateArrows();
+          });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initCategorySliders);
+        } else {
+          initCategorySliders();
+        }
+        document.addEventListener('shopify:section:load', initCategorySliders);
+      })();
+    </script>
 
     {%- if section.settings.show_view_all -%}
       <div class="shop-by-category__footer text-center">
@@ -121,6 +209,13 @@
       "id": "heading",
       "label": "Heading",
       "default": "SHOP BY CATEGORY"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_all_collections",
+      "label": "Auto-show all store collections",
+      "default": true,
+      "info": "When enabled, automatically displays all collections in your store. When disabled, only manually added blocks below will show."
     },
     {
       "type": "checkbox",

@@ -196,6 +196,16 @@
               },
               "blocks": {}
             },
+            "review_block_cart": {
+              "type": "review",
+              "settings": {
+                "show_rating_number": true,
+                "show_number": true,
+                "star_color": "#E5A01A",
+                "star_empty_color": "#E5E5E5",
+                "alignment": "left"
+              }
+            },
             "price_yXfkPX": {
               "type": "price",
               "name": "t:names.product_price",
@@ -222,6 +232,7 @@
           "block_order": [
             "product_card_gallery_PEPpfq",
             "product_title_WNMpHe",
+            "review_block_cart",
             "price_yXfkPX"
           ]
         }
