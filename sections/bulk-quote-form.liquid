@@ -1,0 +1,323 @@
+{{ 'section-bulk-quote-form.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .bulk-quote-section-{{ section.id }} {
+    --form-bg: {{ section.settings.background_color | default: '#FFFFFF' }};
+    --form-text: {{ section.settings.text_color | default: '#1C1917' }};
+    --form-accent: {{ section.settings.accent_color | default: '#824E2B' }};
+    background-color: var(--form-bg);
+    color: var(--form-text);
+  }
+{%- endstyle -%}
+
+<section class="bulk-quote-section bulk-quote-section-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="about-container">
+    <div class="bulk-quote__layout">
+      
+      <!-- Main Form Column -->
+      <div class="bulk-quote__form-container">
+        
+        <div class="bulk-form-card">
+          <div class="bulk-form-card__header">
+            <h2 class="bulk-form-card__title">{{ section.settings.form_title | default: 'Request A Commercial Bulk Quote' | escape }}</h2>
+            <p class="bulk-form-card__subtitle">{{ section.settings.form_subtitle | default: 'Fill in your project specifications and our senior B2B consultant will generate a bespoke quotation within 4 hours.' | escape }}</p>
+          </div>
+
+          {%- form 'contact', id: 'BulkQuoteForm', class: 'bulk-form' -%}
+            
+            {%- if form.posted_successfully? -%}
+              <div class="bulk-form__alert bulk-form__alert--success" role="alert" tabindex="-1" autofocus>
+                <div class="alert-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="alert-content">
+                  <h3 class="alert-title">{{ section.settings.success_title | default: 'Quote Request Received!' | escape }}</h3>
+                  <p class="alert-text">{{ section.settings.success_message | default: 'Thank you for reaching out. Our B2B commercial specialist has received your inquiry and will email you the custom pricing sheet shortly.' | escape }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- if form.errors -%}
+              <div class="bulk-form__alert bulk-form__alert--error" role="alert">
+                <div class="alert-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <div class="alert-content">
+                  <h3 class="alert-title">Please review the required fields</h3>
+                  <ul class="alert-list">
+                    {%- for field in form.errors -%}
+                      <li>
+                        {{ form.errors.translated_fields[field] | capitalize }}
+                        {{ form.errors.messages[field] }}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </div>
+            {%- endif -%}
+
+            <input type="hidden" name="contact[Inquiry_Type]" value="Bulk / B2B Commercial Quote">
+
+            <div class="bulk-form__grid">
+              
+              <!-- Full Name -->
+              <div class="form-group">
+                <label for="BulkForm-Name" class="form-label">Full Name <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="BulkForm-Name"
+                  name="contact[name]"
+                  class="form-input"
+                  placeholder="e.g. Vikram Singhania"
+                  required
+                  value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                >
+              </div>
+
+              <!-- Company Name -->
+              <div class="form-group">
+                <label for="BulkForm-Company" class="form-label">Company / Architectural Firm</label>
+                <input
+                  type="text"
+                  id="BulkForm-Company"
+                  name="contact[Company_Name]"
+                  class="form-input"
+                  placeholder="e.g. Studio Vista Architecture"
+                >
+              </div>
+
+              <!-- Work Email -->
+              <div class="form-group">
+                <label for="BulkForm-Email" class="form-label">Email Address <span class="required">*</span></label>
+                <input
+                  type="email"
+                  id="BulkForm-Email"
+                  name="contact[email]"
+                  class="form-input"
+                  placeholder="name@company.com"
+                  required
+                  autocomplete="email"
+                  value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                >
+              </div>
+
+              <!-- Phone / WhatsApp -->
+              <div class="form-group">
+                <label for="BulkForm-Phone" class="form-label">WhatsApp / Phone Number <span class="required">*</span></label>
+                <input
+                  type="tel"
+                  id="BulkForm-Phone"
+                  name="contact[phone]"
+                  class="form-input"
+                  placeholder="+91 98765 43210"
+                  required
+                  value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                >
+              </div>
+
+              <!-- Project Type Dropdown -->
+              <div class="form-group">
+                <label for="BulkForm-ProjectType" class="form-label">Project Type <span class="required">*</span></label>
+                <select id="BulkForm-ProjectType" name="contact[Project_Type]" class="form-select" required>
+                  <option value="" disabled selected>Select project category...</option>
+                  <option value="Interior Design / Architecture">Interior Design / Architecture Studio</option>
+                  <option value="Hotel / Resort / Hospitality">Hotel, Resort & Hospitality</option>
+                  <option value="Corporate Office / Coworking">Corporate Office / Commercial Workspace</option>
+                  <option value="Real Estate / Builder Project">Real Estate / Builder Sample Flats</option>
+                  <option value="Retail Resale / Showroom">Retailer / Bulk Distribution</option>
+                  <option value="Luxury Private Residence">Luxury Private Residence (High Volume)</option>
+                  <option value="Other Commercial Project">Other Commercial Project</option>
+                </select>
+              </div>
+
+              <!-- Estimated Quantity Dropdown -->
+              <div class="form-group">
+                <label for="BulkForm-Quantity" class="form-label">Estimated Quantity <span class="required">*</span></label>
+                <select id="BulkForm-Quantity" name="contact[Estimated_Quantity]" class="form-select" required>
+                  <option value="" disabled selected>Select estimated unit volume...</option>
+                  <option value="10 - 25 Units">10 - 25 Units (Up to 15% discount)</option>
+                  <option value="26 - 50 Units">26 - 50 Units (Up to 20% discount)</option>
+                  <option value="51 - 100 Units">51 - 100 Units (Up to 25% discount)</option>
+                  <option value="100 - 500 Units">100 - 500 Units (Up to 35% discount)</option>
+                  <option value="500+ Units (Enterprise)">500+ Units (Custom OEM / Up to 40%)</option>
+                </select>
+              </div>
+
+              <!-- Target Budget Range -->
+              <div class="form-group">
+                <label for="BulkForm-Budget" class="form-label">Target Budget Range</label>
+                <select id="BulkForm-Budget" name="contact[Budget_Range]" class="form-select">
+                  <option value="" disabled selected>Select budget range...</option>
+                  <option value="₹1,00,000 - ₹3,00,000">₹1,00,000 - ₹3,00,000</option>
+                  <option value="₹3,00,000 - ₹7,00,000">₹3,00,000 - ₹7,00,000</option>
+                  <option value="₹7,00,000 - ₹15,00,000">₹7,00,000 - ₹15,00,000</option>
+                  <option value="₹15,00,000 - ₹30,00,000">₹15,00,000 - ₹30,00,000</option>
+                  <option value="₹30,00,000+ (Large Enterprise)">₹30,00,000+ (Large Enterprise)</option>
+                </select>
+              </div>
+
+              <!-- Delivery City / State -->
+              <div class="form-group">
+                <label for="BulkForm-City" class="form-label">Delivery City & State <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="BulkForm-City"
+                  name="contact[Delivery_Location]"
+                  class="form-input"
+                  placeholder="e.g. Mumbai, Maharashtra"
+                  required
+                >
+              </div>
+
+              <!-- Full Message / Details -->
+              <div class="form-group form-group--full">
+                <label for="BulkForm-Body" class="form-label">Project Requirements & Product Details</label>
+                <textarea
+                  id="BulkForm-Body"
+                  name="contact[body]"
+                  class="form-textarea"
+                  rows="4"
+                  placeholder="Tell us about specific items (e.g., 20 Dining Tables, 80 Solid Teak Chairs), custom dimension requests, wood polish preferences, or delivery target date..."
+                >{{ form.body }}</textarea>
+              </div>
+
+            </div>
+
+            <!-- Submit Button -->
+            <div class="bulk-form__footer">
+              <button type="submit" class="bulk-submit-btn">
+                <span>SUBMIT BULK QUOTE INQUIRY</span>
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </button>
+              <span class="bulk-form__guarantee">🔒 Confidential • No obligation quote • Direct factory support</span>
+            </div>
+
+          {%- endform -%}
+        </div>
+
+      </div>
+
+      <!-- Side Direct Contact Column -->
+      <div class="bulk-quote__sidebar">
+        
+        <!-- Quick WhatsApp Card -->
+        <div class="sidebar-card sidebar-card--accent">
+          <div class="sidebar-card__header">
+            <span class="sidebar-card__badge">URGENT INQUIRIES</span>
+            <h3 class="sidebar-card__title">Need An Instant Estimate?</h3>
+            <p class="sidebar-card__text">Chat directly with our B2B commercial lead on WhatsApp for quick stock checks and fast quotation.</p>
+          </div>
+          <a
+            href="https://wa.me/919876543210?text=Hi%20FurniCraft,%20I%20would%20like%20to%20inquire%20about%20a%20bulk%20commercial%20furniture%20order."
+            class="sidebar-wa-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.301-.15-1.78-.878-2.056-.978-.276-.1-.476-.15-.676.15-.2.3-.776.978-.952 1.178-.175.2-.351.226-.652.075-.301-.15-1.27-.468-2.42-1.493-.894-.798-1.498-1.784-1.674-2.085-.175-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.175.2-.301.301-.501.1-.2.05-.376-.025-.527-.075-.15-.677-1.632-.927-2.234-.244-.587-.492-.507-.676-.517l-.577-.01c-.2 0-.527.075-.802.376-.276.301-1.053 1.028-1.053 2.508s1.078 2.909 1.229 3.11c.15.2 2.121 3.239 5.14 4.542.718.31 1.279.495 1.716.634.721.23 1.378.197 1.898.12.58-.087 1.78-.727 2.03-1.43.25-.702.25-1.304.175-1.43-.075-.125-.276-.2-.577-.35z"/>
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.12c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.1 8.1 0 0 1-1.25-4.35c0-4.48 3.65-8.13 8.14-8.13 2.17 0 4.21.85 5.75 2.38a8.07 8.07 0 0 1 2.39 5.75c0 4.48-3.66 8.13-8.14 8.13z"/>
+            </svg>
+            <span>START WHATSAPP CHAT</span>
+          </a>
+        </div>
+
+        <!-- Direct Contact Points -->
+        <div class="sidebar-card">
+          <h4 class="sidebar-title">B2B Commercial Desk</h4>
+          <ul class="sidebar-contact-list">
+            <li class="sidebar-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <div>
+                <span class="contact-label">Phone Support</span>
+                <a href="tel:+919876543210" class="contact-value">+91 98765 43210</a>
+              </div>
+            </li>
+            <li class="sidebar-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <div>
+                <span class="contact-label">B2B Tender & RFQ Email</span>
+                <a href="mailto:b2b@furnicraft.com" class="contact-value">b2b@furnicraft.com</a>
+              </div>
+            </li>
+            <li class="sidebar-contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <div>
+                <span class="contact-label">Operating Hours</span>
+                <span class="contact-text">Mon - Sat: 9:30 AM - 7:00 PM IST</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bulk Quote Form",
+  "tag": "section",
+  "class": "section-bulk-form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Form Title",
+      "default": "Request A Commercial Bulk Quote"
+    },
+    {
+      "type": "text",
+      "id": "form_subtitle",
+      "label": "Form Subtitle",
+      "default": "Fill in your project specifications and our senior B2B consultant will generate a bespoke quotation within 4 hours."
+    },
+    {
+      "type": "header",
+      "content": "Success Message"
+    },
+    {
+      "type": "text",
+      "id": "success_title",
+      "label": "Success Title",
+      "default": "Quote Request Received!"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success Message Text",
+      "default": "Thank you for reaching out. Our B2B commercial specialist has received your inquiry and will email you the custom pricing sheet shortly."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1C1917"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#824E2B"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bulk Quote Form"
+    }
+  ]
+}
+{% endschema %}

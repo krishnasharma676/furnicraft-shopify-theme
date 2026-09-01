@@ -1,0 +1,139 @@
+{
+  "sections": {
+    "bulk_hero": {
+      "type": "bulk-quote-hero",
+      "settings": {
+        "badge_text": "WHOLESALE & ARCHITECTURAL INQUIRIES",
+        "heading": "Partner With FurniCraft For Bulk & Commercial Furniture",
+        "subheading": "We collaborate with interior architects, hotel developers, corporate spaces, and retailers to supply handcrafted heirloom furniture with direct factory pricing and white-glove site delivery.",
+        "background_color": "#FAF8F5",
+        "text_color": "#1C1917",
+        "accent_color": "#824E2B"
+      }
+    },
+    "bulk_form": {
+      "type": "bulk-quote-form",
+      "settings": {
+        "form_title": "Request A Commercial Bulk Quote",
+        "form_subtitle": "Fill in your project specifications and our senior B2B consultant will generate a bespoke quotation within 4 hours.",
+        "success_title": "Quote Request Received!",
+        "success_message": "Thank you for reaching out. Our B2B commercial specialist has received your inquiry and will email you the custom pricing sheet shortly.",
+        "background_color": "#FFFFFF",
+        "text_color": "#1C1917",
+        "accent_color": "#824E2B"
+      }
+    },
+    "bulk_perks": {
+      "type": "bulk-quote-perks",
+      "blocks": {
+        "perk_1": {
+          "type": "perk_item",
+          "settings": {
+            "icon": "discount",
+            "title": "Tiered Volume Discounts",
+            "description": "Save 15% to 40% on bulk volume orders with transparent factory-direct pricing and GST input credit."
+          }
+        },
+        "perk_2": {
+          "type": "perk_item",
+          "settings": {
+            "icon": "cad",
+            "title": "Custom CAD & Bespoke Sizing",
+            "description": "We fabricate custom dimensions, wood finishes, and upholstery tailored to your exact architectural blueprints."
+          }
+        },
+        "perk_3": {
+          "type": "perk_item",
+          "settings": {
+            "icon": "manager",
+            "title": "Dedicated Account Manager",
+            "description": "Direct single point of contact for live factory updates, wood sample swatches, and milestone tracking."
+          }
+        },
+        "perk_4": {
+          "type": "perk_item",
+          "settings": {
+            "icon": "truck",
+            "title": "Pan-India White-Glove Logistics",
+            "description": "Insured heavy freight dispatch with on-site unboxing, room-of-choice placement, and debris removal."
+          }
+        }
+      },
+      "block_order": [
+        "perk_1",
+        "perk_2",
+        "perk_3",
+        "perk_4"
+      ],
+      "settings": {
+        "badge_text": "THE FURNICRAFT B2B ADVANTAGE",
+        "heading": "Why Commercial Clients Choose FurniCraft",
+        "subheading": "From boutique design agencies to multi-story hospitality chains, we deliver exceptional craftsmanship on time and within budget.",
+        "background_color": "#2C221E",
+        "text_color": "#FFFFFF",
+        "accent_color": "#D4A373"
+      }
+    },
+    "bulk_faq": {
+      "type": "bulk-quote-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the Minimum Order Quantity (MOQ) for bulk discounts?",
+            "answer": "Our commercial volume pricing starts at 10 units or a minimum project order value of ₹1,00,000. Discounts increase from 15% up to 40% based on total quantity."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can we request wood finish swatches and prototype samples?",
+            "answer": "Yes! For verified architectural and commercial projects, we courier physical wood sample boxes (Natural Teak, Walnut, Dark Oak, Linseed Oil) and can manufacture paid pre-production prototypes."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are your standard manufacturing lead times for bulk orders?",
+            "answer": "Standard catalog items in volume typically dispatch in 10-18 business days. Custom architectural designs and high-volume runs (100+ units) require 3-5 weeks from CAD approval."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you provide official GST invoices with input tax credit?",
+            "answer": "Yes, 100%. We provide compliant B2B tax invoices with your company GSTIN, HSN codes, and transport e-Way bills so you can claim full GST input credit."
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How is pan-India delivery and on-site assembly handled?",
+            "answer": "All bulk freight is insured in heavy-duty wooden crating. We coordinate site delivery directly with your project manager, including lift placement and assembly technicians."
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "badge_text": "FREQUENTLY ASKED QUESTIONS",
+        "heading": "Commercial & Bulk Ordering FAQ",
+        "subheading": "Everything you need to know about lead times, samples, GST billing, and custom manufacturing.",
+        "background_color": "#FAF8F5",
+        "text_color": "#1C1917",
+        "accent_color": "#824E2B"
+      }
+    }
+  },
+  "order": [
+    "bulk_hero",
+    "bulk_form",
+    "bulk_perks",
+    "bulk_faq"
+  ]
+}

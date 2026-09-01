@@ -1,0 +1,157 @@
+{{ 'section-bulk-quote-faq.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .bulk-faq-{{ section.id }} {
+    --faq-bg: {{ section.settings.background_color | default: '#FAF8F5' }};
+    --faq-text: {{ section.settings.text_color | default: '#1C1917' }};
+    --faq-accent: {{ section.settings.accent_color | default: '#824E2B' }};
+    background-color: var(--faq-bg);
+    color: var(--faq-text);
+  }
+{%- endstyle -%}
+
+<section class="bulk-faq bulk-faq-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="about-container">
+    
+    <div class="bulk-faq__header">
+      {%- if section.settings.badge_text != blank -%}
+        <span class="bulk-faq__badge">{{ section.settings.badge_text | escape }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="bulk-faq__title">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="bulk-faq__subtitle">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="bulk-faq__list">
+      {%- for block in section.blocks -%}
+        <details class="bulk-faq-item" {{ block.shopify_attributes }}>
+          <summary class="bulk-faq-item__question">
+            <span class="faq-question-text">{{ block.settings.question | escape }}</span>
+            <span class="faq-chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="bulk-faq-item__answer">
+            <p>{{ block.settings.answer }}</p>
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "B2B Commercial FAQ",
+  "tag": "section",
+  "class": "section-bulk-faq",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "FREQUENTLY ASKED QUESTIONS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Commercial & Bulk Ordering FAQ"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Everything you need to know about lead times, samples, GST billing, and custom manufacturing."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FAF8F5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1C1917"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#824E2B"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is the Minimum Order Quantity (MOQ) for bulk discounts?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Our commercial bulk pricing starts at a minimum of 10 units (or combined project invoice value of ₹1,00,000). Tiered discounts scale automatically with order volume."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "B2B Commercial FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the Minimum Order Quantity (MOQ) for bulk discounts?",
+            "answer": "Our commercial volume pricing starts at 10 units or a minimum project order value of ₹1,00,000. Discounts increase from 15% up to 40% based on total quantity."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can we request wood finish swatches and prototype samples?",
+            "answer": "Yes! For verified architectural and commercial projects, we courier physical wood sample boxes (Natural Teak, Walnut, Dark Oak, Linseed Oil) and can manufacture paid pre-production prototypes."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are your standard manufacturing lead times for bulk orders?",
+            "answer": "Standard catalog items in volume typically dispatch in 10-18 business days. Custom architectural designs and high-volume runs (100+ units) require 3-5 weeks from CAD approval."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you provide official GST invoices with input tax credit?",
+            "answer": "Yes, 100%. We provide compliant B2B tax invoices with your company GSTIN, HSN codes, and transport e-Way bills so you can claim full GST input credit."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How is pan-India delivery and on-site assembly handled?",
+            "answer": "All bulk freight is insured in heavy-duty wooden crating. We coordinate site delivery directly with your project manager, including lift placement and assembly technicians."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,119 @@
+/* ==========================================================================
+   B2B Wholesale Perks Styles
+   ========================================================================== */
+
+.bulk-perks {
+  position: relative;
+  padding-block: clamp(64px, 8vw, 108px);
+  background-color: var(--perks-bg, #2C221E);
+}
+
+.bulk-perks__header {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto clamp(36px, 5vw, 60px) auto;
+}
+
+.bulk-perks__badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--perks-accent, #D4A373);
+  margin-bottom: 12px;
+}
+
+.bulk-perks__title {
+  font-size: clamp(2rem, 3.4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--perks-text, #FFFFFF);
+  margin: 0 0 14px 0;
+}
+
+.bulk-perks__subtitle {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.68);
+  margin: 0;
+}
+
+.bulk-perks__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(18px, 2.5vw, 28px);
+}
+
+.bulk-perk-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 34px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+}
+
+.bulk-perk-card:hover {
+  transform: translateY(-6px);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border-color: var(--perks-accent, #D4A373);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+}
+
+.bulk-perk-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(212, 163, 115, 0.14);
+  color: var(--perks-accent, #D4A373);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  transition: all 0.3s ease;
+}
+
+.bulk-perk-card:hover .bulk-perk-card__icon {
+  background: var(--perks-accent, #D4A373);
+  color: #1C1917;
+  transform: scale(1.08);
+}
+
+.bulk-perk-card__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.bulk-perk-card__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+}
+
+.bulk-perk-card__desc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0;
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+  .bulk-perks__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .bulk-perks__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

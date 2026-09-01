@@ -1,0 +1,167 @@
+/* ==========================================================================
+   Bulk Quote Hero Styles
+   ========================================================================== */
+
+.bulk-hero {
+  position: relative;
+  padding-block: clamp(56px, 7vw, 92px);
+  background-color: var(--b2b-bg, #FAF8F5);
+  text-align: center;
+}
+
+.bulk-hero__content {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.bulk-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(130, 78, 43, 0.08);
+  border: 1px solid rgba(130, 78, 43, 0.22);
+  padding: 8px 18px;
+  border-radius: 9999px;
+  margin-bottom: 24px;
+}
+
+.bulk-hero__badge-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--b2b-accent, #824E2B);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(130, 78, 43, 0.25);
+}
+
+.bulk-hero__badge-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--b2b-accent, #824E2B);
+}
+
+.bulk-hero__title {
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--b2b-text, #1C1917);
+  margin: 0 0 20px 0;
+}
+
+.bulk-hero__subtitle {
+  font-size: clamp(1rem, 1.25vw, 1.125rem);
+  line-height: 1.65;
+  color: rgba(28, 25, 23, 0.75);
+  margin: 0 auto 36px auto;
+  max-width: 740px;
+}
+
+/* Tiered Discount Highlights */
+.bulk-hero__tiers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.bulk-tier-pill {
+  position: relative;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(28, 25, 23, 0.1);
+  border-radius: 12px;
+  padding: 14px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.bulk-tier-pill:hover {
+  transform: translateY(-3px);
+  border-color: var(--b2b-accent, #824E2B);
+  box-shadow: 0 10px 24px rgba(130, 78, 43, 0.12);
+}
+
+.bulk-tier-pill--featured {
+  border-color: var(--b2b-accent, #824E2B);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 100%);
+  box-shadow: 0 8px 24px rgba(130, 78, 43, 0.14);
+}
+
+.bulk-tier-pill__tag {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--b2b-accent, #824E2B);
+  color: #FFFFFF;
+  font-size: 0.625rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.bulk-tier-pill__label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #78716C;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bulk-tier-pill__discount {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--b2b-accent, #824E2B);
+}
+
+/* Key Assurance Strip */
+.bulk-hero__assurances {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(28, 25, 23, 0.1);
+}
+
+.assurance-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(28, 25, 23, 0.7);
+}
+
+.assurance-chip svg {
+  width: 18px;
+  height: 18px;
+  color: var(--b2b-accent, #824E2B);
+}
+
+/* Responsive */
+@media screen and (max-width: 640px) {
+  .bulk-hero__tiers {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .bulk-tier-pill {
+    width: 100%;
+  }
+
+  .bulk-hero__assurances {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+}
